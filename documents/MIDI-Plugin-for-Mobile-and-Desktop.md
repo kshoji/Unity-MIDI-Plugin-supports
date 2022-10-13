@@ -1,3 +1,9 @@
+The latest document is on the GitHub.  
+If you have any questions or issues, please post an issue on GitHub.  
+[https://github.com/kshoji/Unity-MIDI-Plugin-supports](https://github.com/kshoji/Unity-MIDI-Plugin-supports)
+
+----
+
 This document explains how to install the plugin, and to use the plugin's features.
 
 # Table of Contents
@@ -47,14 +53,49 @@ The available MIDI interfaces for each platforms are listed below.
 | WebGL | ○ | ○ | - |
 
 ## About limitations
-- iOS / OSX
-    - Bluetooth MIDI support is Central mode only.
-- Windows
-    - Bluetooth MIDI is not supported.
-- WebGL
-    - Supporting devices depend on the running OS environment.
-- Network MIDI
-    - The error correction(RTP MIDI Journaling) protocol is not supported on experimental support specified above.
+### Android
+- USB MIDI is supported API Level 12 (Android 3.1) or above.
+- Bluetooth MIDI is supported API Level 18 (Android 4.3) or above.
+
+### iOS / OSX
+- Supported iOS version 11.0 or above.
+- Bluetooth MIDI support is Central mode only.
+
+### UWP
+- Supported UWP platform version 10.0.10240.0 or above.
+- Bluetooth MIDI is not supported.
+- To use Network MIDI(RTP-MIDI) feature, enable `PrivateNetworkClientServer` at `Project Settings > Player > Capabilities` setting.
+
+### Windows
+- Bluetooth MIDI is not supported.
+
+### WebGL
+- Supporting MIDI devices are depend on the running OS/Browser environment.
+- WebGL may not access to another server resources with UnityWebRequest, so put resource files(such as SMF) into `StreamingAssets`.
+- You *should* modify `index.html` file of `WebGLTemplates` directory like below. This enables to access Unity's runtime from `unityInstance` variable.
+    - Or, copy `MIDI/Samples/WebGLTemplates` files to `Assets/WebGLTemplates`, and select `Default-MIDI` or `Minimal-MIDI` template from `Project Settings > Player > Resolution and Presentation > WebGL Template` setting.
+    - For more information, see [Unity official document of WebGL Templates](https://docs.unity3d.com/Manual/webgl-templates.html).
+
+Original:
+```js
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+```
+
+Modified: add global `unityInstance` variable.
+```js
+      var unityInstance = null; // <- HERE
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInst) => { // <- HERE
+          unityInstance = unityInst; // <- HERE
+```
+
+### Network MIDI
+- The error correction(RTP MIDI Journaling) protocol is not supported on experimental support specified above.
 
 <div class="page" />
 

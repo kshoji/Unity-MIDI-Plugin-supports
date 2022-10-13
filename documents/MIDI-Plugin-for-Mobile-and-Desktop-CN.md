@@ -1,3 +1,10 @@
+最新的文档在 GitHub 上。  
+如果有任何问题或问题，请在 GitHub 上发布问题。  
+[https://github.com/kshoji/Unity-MIDI-Plugin-supports](https://github.com/kshoji/Unity-MIDI-Plugin-supports)
+
+----
+
+
 本文档解释了如何安装 插件，以及如何使用插件的功能。  
 *这是机器翻译的文件。 更多详细信息，请参阅原始英文文档。*
 
@@ -49,14 +56,49 @@
 | WebGL | ○ | ○ | - |
 
 ## 关于限制
-- iOS / OSX
-    - Bluetooth MIDI 支持仅限于 Central 模式。
-- Windows
-    - 不支持 Bluetooth MIDI。
-- WebGL
-    - 支持的设备取决于运行的操作系统环境。
-- Network MIDI
-    - 上面指定的实验支持不支持纠错（RTP MIDI Journaling）协议。
+### Android
+- API 级别 12 (Android 3.1) 或更高版本支持 USB MIDI。
+- API 级别 18 (Android 4.3) 或更高版本支持蓝牙 MIDI。
+
+### iOS / OSX
+- 支持 iOS 11.0 或更高版本。
+- Bluetooth MIDI 支持仅限于 Central 模式。
+
+### UWP
+- 支持的 UWP 平台版本 10.0.10240.0 或以上。
+- 不支持 Bluetooth MIDI。
+- 要使用网络 MIDI(RTP-MIDI) 功能，请在 `Project Settings > Player > Capabilities` 设置中启用 `PrivateNetworkClientServer`。
+
+### Windows
+- 不支持 Bluetooth MIDI。
+
+### WebGL
+- 支持的 MIDI 设备取决于运行的操作系统/浏览器环境。
+- WebGL 可能无法通过 UnityWebRequest 访问其他服务器资源，因此请将资源文件（例如 SMF）放入 `StreamingAssets`。
+- 您 *应该* 修改 `WebGLTemplates` 目录的 `index.html` 文件，如下所示。 这可以从 `unityInstance` 变量访问 Unity 的运行时。
+    - 或者，将 `MIDI/Samples/WebGLTemplates` 文件复制到 `Assets/WebGLTemplates`，然后从 `Project Settings > Player > Resolution and Presentation > WebGL Template` 设置中选择 `Default-MIDI` 或 `Minimal-MIDI` 模板。
+    - 有关更多信息，请参阅 [WebGL 模板的 Unity 官方文档](https://docs.unity3d.com/Manual/webgl-templates.html)。
+
+原文:
+```js
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+```
+
+修改的: 添加 `unityInstance` 全局变量。
+```js
+      var unityInstance = null; // <- HERE
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInst) => { // <- HERE
+          unityInstance = unityInst; // <- HERE
+```
+
+### Network MIDI
+- 上面指定的实验支持不支持纠错（RTP MIDI Journaling）协议。
 
 <div class="page" />
 

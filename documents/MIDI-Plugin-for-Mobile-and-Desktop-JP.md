@@ -1,3 +1,9 @@
+最新のドキュメントはGitHubにあります。  
+質問や問題があればGitHubのissueまで ご投稿ください。  
+[https://github.com/kshoji/Unity-MIDI-Plugin-supports](https://github.com/kshoji/Unity-MIDI-Plugin-supports)
+
+----
+
 プラグインのインストール方法、機能について説明しています。
 
 # 目次
@@ -48,14 +54,49 @@
 | WebGL | ○ | ○ | - |
 
 ## 制限事項
-- iOS / OSX
-    - Bluetooth MIDIはCentralモードのみサポートします。
-- Windows
-    - Bluetooth MIDIはサポートしていません。
-- WebGL
-    - サポートされるデバイスはOSに依存します。
-- Network MIDI
-    - エラー訂正(RTP MIDIジャーナリング)プロトコルは上記に示された「試験的」のプラットフォームでは実装されていません。
+### Android
+- USB MIDI は API Level 12 (Android 3.1) 以上で利用できます。
+- Bluetooth MIDI は API Level 18 (Android 4.3) 以上で利用できます。
+
+### iOS / OSX
+- iOS 11.0 以上で動作します。
+- Bluetooth MIDIはCentralモードのみサポートします。
+
+### UWP
+- UWPのバージョン 10.0.10240.0 以上で動作します。
+- Bluetooth MIDIはサポートしていません。
+- Network MIDI(RTP-MIDI) 機能を使う場合は、`Project Settings > Player > Capabilities` の設定にある `PrivateNetworkClientServer` を有効にしてください。
+
+### Windows
+- Bluetooth MIDIはサポートしていません。
+
+### WebGL
+- サポートされるMIDIデバイスはOSやブラウザに依存します。
+- WebGL はUnityWebRequestを使って他のサーバーのリソースにアクセスできない場合があるので、SMFなどのリソースファイルを `StreamingAssets` に置いてください。
+- `WebGLTemplates` ディレクトリの `index.html` ファイルを下記のように変更する *必要があります。*  `unityInstance` 変数を経由してUnityのランタイムにアクセスできようにしています。
+    - もしくは、 `MIDI/Samples/WebGLTemplates` のファイルを `Assets/WebGLTemplates` にコピーし、 `Project Settings > Player > Resolution and Presentation > WebGL Template` の設定から、 `Default-MIDI` か `Minimal-MIDI` のテンプレートを選択します。
+    - 詳しくは、[Unity公式のWebGL Templatesドキュメント](https://docs.unity3d.com/Manual/webgl-templates.html) を参照してください。
+
+オリジナルの抜粋:
+```js
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+```
+
+修正後: グローバル変数 `unityInstance` を追加
+```js
+      var unityInstance = null; // <- HERE
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInst) => { // <- HERE
+          unityInstance = unityInst; // <- HERE
+```
+
+### Network MIDI
+- エラー訂正(RTP MIDIジャーナリング)プロトコルは上記に示された「試験的」のプラットフォームでは実装されていません。
 
 <div class="page" />
 
