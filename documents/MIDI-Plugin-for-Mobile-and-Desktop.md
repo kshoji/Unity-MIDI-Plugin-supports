@@ -44,7 +44,7 @@ The available MIDI interfaces for each platforms are listed below.
 
 | Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) |
 | ---- | ---- | ---- | ---- |
-| iOS | ○ | - | ○ |
+| iOS | ○ | ○ | ○ |
 | Android | ○ | ○ | △(experimental) |
 | Universal Windows Platform | - | ○ | △(experimental) |
 | Standalone OSX, Unity Editor OSX | ○ | ○ | ○ |
@@ -314,8 +314,11 @@ if (sequence.GetTickLength() > 0)
     - Quicco mi.1 (BLE MIDI)
     - Miselu C.24 (BLE MIDI)
     - Roland UM-ONE (USB MIDI)
+        - NOTE: This device didn't work with iOS.
     - Gakken NSX-39 (USB-MIDI)
     - MacOS Audio MIDI Setup (RTP-MIDI)
+
+<div class="page" />
 
 # Version History
 - v1.0 Initial release
