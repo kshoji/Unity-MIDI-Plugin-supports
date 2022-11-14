@@ -45,7 +45,7 @@
 
 | Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) |
 | ---- | ---- | ---- | ---- |
-| iOS | ○ | - | ○ |
+| iOS | ○ | ○ | ○ |
 | Android | ○ | ○ | △(試験的に対応) |
 | Universal Windows Platform | - | ○ | △(試験的に対応) |
 | Standalone OSX, Unity Editor OSX | ○ | ○ | ○ |
@@ -325,8 +325,11 @@ if (sequence.GetTickLength() > 0)
     - Quicco mi.1 (BLE MIDI)
     - Miselu C.24 (BLE MIDI)
     - Roland UM-ONE (USB MIDI)
+       - NOTE: このデバイスはiOSでは動きませんでした。
     - Gakken NSX-39 (USB-MIDI)
     - MacOS Audio MIDI Setup (RTP-MIDI)
+
+<div class="page" />
 
 # バージョン履歴
 - v1.0 初期リリース
