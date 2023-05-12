@@ -12,8 +12,8 @@ This document explains how to install the plugin, and to use the plugin's featur
     - [About limitations](#about-limitations)
 - [How to install plugin](#how-to-install-plugin)
 - [About build PostProcessing](#about-build-postprocessing)
-    - [iOS](#ios)
-    - [Android](#android)
+    - [iOS](#postprocessing-ios)
+    - [Android](#postprocessing-android)
 - [How to implement features](#how-to-implement-features)
     - [Initializing Plugin](#initializing-plugin)
     - [Terminating Plugin](#terminating-plugin)
@@ -25,6 +25,7 @@ This document explains how to install the plugin, and to use the plugin's featur
     - [Read SMF as a Sequence, and play it](#read-smf-as-a-sequence-and-play-it)
     - [Record a sequence](#record-a-sequence)
     - [Write the sequence to a SMF file](#write-the-sequence-to-a-smf-file)
+    - [Android: Use CompanionDeviceManager to find BLE MIDI devices](#android-use-companiondevicemanager-to-find-ble-midi-devices)
 - [Tested devices](#tested-devices)
 - [Version History](#version-history)
 - [Contacts](#contacts)
@@ -105,15 +106,27 @@ Modified: add global `unityInstance` variable.
     - The sample scene is found at Assets/MIDI/Samples directory.
 
 # About build PostProcessing
-## iOS
+## PostProcessing: iOS
 - Additional framework will be automatically added while building postprocess.
     - Additional frameworks: `CoreMIDI framework`, `CoreAudioKit.framework`
 - `Info.plist` will be automatically adjusted while building postprocess.
     - Additional property: `NSBluetoothAlwaysUsageDescription`
-## Android
+## PostProcessing: Android
 - `AndroidManifest.xml` will be automatically adjusted while building postprocess.
     - Additional permissions: `android.permission.BLUETOOTH`, `android.permission.BLUETOOTH_ADMIN`, `android.permission.ACCESS_FINE_LOCATION`, `android.permission.BLUETOOTH_SCAN`, `android.permission.BLUETOOTH_CONNECT`, `android.permission.BLUETOOTH_ADVERTISE`.
-    - Additional feature: `android.hardware.bluetooth_le`
+    - Additional feature: `android.hardware.bluetooth_le`, `android.hardware.usb.host`
+-  If you want to use the USB MIDI feature on Oculus(Meta) Quest 2, please UNCOMMENT below to detect USB MIDI device connections.
+
+The part of `PostProcessBuild.cs`
+```cs
+    public class ModifyAndroidManifest : IPostGenerateGradleAndroidProject
+    {
+        public void OnPostGenerateGradleAndroidProject(string basePath)
+        {
+            :
+
+            // androidManifest.AddUsbIntentFilterForOculusDevices(); // UNCOMMENT THIS LINE FOR OCULUS QUEST 2
+```
 
 <div class="page" />
 
@@ -302,6 +315,14 @@ if (sequence.GetTickLength() > 0)
 ```
 **<p style="text-align: center;">Fig.11 Write a SMF from recorded Sequence</p>**
 
+## Android: Use CompanionDeviceManager to find BLE MIDI devices
+You can use [CompanionDeviceManager](https://developer.android.com/guide/topics/connectivity/companion-device-pairing) for BLE MIDI device connection on Android.
+
+To enable this feature, add `FEATURE_ANDROID_COMPANION_DEVICE` to the `Scripting Define Symbols` setting.
+```
+Project Settings > Other Settings > Script Compilation > Scripting Define Symbols
+```
+
 <div class="page" />
 
 # Tested devices
@@ -313,6 +334,7 @@ if (sequence.GetTickLength() > 0)
 - MIDI devices:
     - Quicco mi.1 (BLE MIDI)
     - Miselu C.24 (BLE MIDI)
+    - TAHORNG Elefue (BLE MIDI)
     - Roland UM-ONE (USB MIDI)
         - NOTE: This device didn't work with iOS.
     - Gakken NSX-39 (USB-MIDI)
@@ -349,6 +371,15 @@ if (sequence.GetTickLength() > 0)
     - Add support for Unity Editor OSX, Windows, Linux
     - Changed Sequencer implementation from Thread to Coroutine
     - Fix iOS/OSX device attaching/detaching issue
+- v1.3.1 Bugfix release
+    - [Issue connecting to Quest 2 via cable](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/1)
+    - [Sample scene stops working.](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/5)
+    - [Byte is obsolete on android](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/8)
+    - [Any way of negotiating MTU?](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/9)
+    - [Can't get it to work on iOS](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/10)
+    - [Have errors with sample scene](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/11)
+    - Android permissions requesting issue
+    - Add: Android CompanionDeviceManager support
 
 <div class="page" />
 

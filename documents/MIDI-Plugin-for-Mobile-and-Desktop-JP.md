@@ -12,8 +12,8 @@
     - [制限事項](#制限事項)
 - [プラグインのインストール](#プラグインのインストール)
 - [ビルドの後処理(PostProcessing)について](#ビルドの後処理postprocessingについて)
-    - [iOS](#ios)
-    - [Android](#android)
+    - [iOS](#postprocessing-ios)
+    - [Android](#postprocessing-android)
 - [機能の実装方法](#機能の実装方法)
     - [プラグインの初期化](#プラグインの初期化)
     - [プラグインの終了](#プラグインの終了)
@@ -25,6 +25,7 @@
     - [SMFをシーケンスとして読み出し、再生する](#smfをシーケンスとして読み出し再生する)
     - [シーケンスを記録する](#シーケンスを記録する)
     - [シーケンスをSMFとして書き出す](#シーケンスをsmfとして書き出す)
+    - [Android: BLE MIDIデバイスの検索にCompanionDeviceManagerを使う](#android-ble-midiデバイスの検索にcompaniondevicemanagerを使う)
 - [テストしたデバイス](#テストしたデバイス)
 - [バージョン履歴](#バージョン履歴)
 - [連絡先](#連絡先)
@@ -106,15 +107,27 @@
     - サンプルシーンは Assets/MIDI/Samples ディレクトリにあります。
 
 # ビルドの後処理(PostProcessing)について
-## iOS
+## PostProcessing: iOS
 - ビルドの後処理によって、追加のフレームワークが自動的に追加されます。
     - 追加のフレームワーク: `CoreMIDI framework`, `CoreAudioKit.framework`
 - `Info.plist` が自動的に調整されます。
     - 追加のプロパティ: `NSBluetoothAlwaysUsageDescription`
-## Android
+## PostProcessing: Android
 - ビルドの後処理によって、 `AndroidManifest.xml` が自動的に調整されます。
     - 追加のパーミッション: `android.permission.BLUETOOTH`, `android.permission.BLUETOOTH_ADMIN`, `android.permission.ACCESS_FINE_LOCATION`, `android.permission.BLUETOOTH_SCAN`, `android.permission.BLUETOOTH_CONNECT`, `android.permission.BLUETOOTH_ADVERTISE`.
-    - 追加のfeature: `android.hardware.bluetooth_le`
+    - 追加のfeature: `android.hardware.bluetooth_le`, `android.hardware.usb.host`
+- Oculus Quest 2 でUSB MIDI機能を使いたい場合、接続を検知するために下記のコードをコメントアウト解除する必要があります。
+
+`PostProcessBuild.cs` の一部
+```cs
+    public class ModifyAndroidManifest : IPostGenerateGradleAndroidProject
+    {
+        public void OnPostGenerateGradleAndroidProject(string basePath)
+        {
+            :
+
+            // androidManifest.AddUsbIntentFilterForOculusDevices(); // Oculus Quest 2のためには、この行をコメント解除する
+```
 
 <div class="page" />
 
@@ -313,6 +326,14 @@ if (sequence.GetTickLength() > 0)
 ```
 **<p style="text-align: center;">図11 記録したシーケンスからSMFを書き出す</p>**
 
+## Android: BLE MIDIデバイスの検索にCompanionDeviceManagerを使う
+AndroidのBLE MIDIデバイスの接続に[CompanionDeviceManager](https://developer.android.com/guide/topics/connectivity/companion-device-pairing)が使えます。
+
+この機能を有効にするには、 `Scripting Define Symbols` の設定に `FEATURE_ANDROID_COMPANION_DEVICE` を追加します。
+```
+Project Settings > Other Settings > Script Compilation > Scripting Define Symbols
+```
+
 <div class="page" />
 
 # テストしたデバイス
@@ -324,6 +345,7 @@ if (sequence.GetTickLength() > 0)
 - MIDI devices:
     - Quicco mi.1 (BLE MIDI)
     - Miselu C.24 (BLE MIDI)
+    - TAHORNG Elefue (BLE MIDI)
     - Roland UM-ONE (USB MIDI)
        - NOTE: このデバイスはiOSでは動きませんでした。
     - Gakken NSX-39 (USB-MIDI)
@@ -360,6 +382,15 @@ if (sequence.GetTickLength() > 0)
     - 追加: Unity Editor OSX, Windows, Linux対応
     - 変更: シーケンサーの実装を Thread から Coroutine に
     - 修正: iOS/OSX でのデバイス接続・切断時の問題
+- v1.3.1 バグ修正
+    - [Issue connecting to Quest 2 via cable](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/1)
+    - [Sample scene stops working.](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/5)
+    - [Byte is obsolete on android](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/8)
+    - [Any way of negotiating MTU?](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/9)
+    - [Can't get it to work on iOS](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/10)
+    - [Have errors with sample scene](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/11)
+    - Androidのパーミッション要求についての問題を解消
+    - AndroidのCompanionDeviceManager経由での接続をサポート
 
 <div class="page" />
 

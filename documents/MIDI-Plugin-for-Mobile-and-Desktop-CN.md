@@ -14,8 +14,8 @@
     - [关于限制](#关于限制)
 - [安装插件](#安装插件)
 - [关于构建 PostProcessing](#关于构建-postprocessing)
-    - [iOS](#ios)
-    - [Android](#android)
+    - [iOS](#postprocessing-ios)
+    - [Android](#postprocessing-android)
 - [实现功能](#实现功能)
     - [初始化插件](#初始化插件)
     - [终止插件](#终止插件)
@@ -27,6 +27,7 @@
     - [将 SMF 读取为 Sequence，并播放它](#将-smf-读取为-sequence并播放它)
     - [记录一个 Sequence](#记录一个-sequence)
     - [将序列写入 SMF 文件](#将序列写入-smf-文件)
+    - [Android: 使用 CompanionDeviceManager 查找 BLE MIDI 设备](#android-使用-companiondevicemanager-查找-ble-midi-设备)
 - [测试设备](#测试设备)
 - [版本历史](#版本历史)
 - [联系](#联系)
@@ -108,16 +109,27 @@
     - 示例场景位于 Assets/MIDI/Samples 目录中。
 
 # 关于构建 PostProcessing
-## iOS
+## PostProcessing: iOS
 - 在构建后期处理时会自动添加额外的框架。
     - 附加框架：`CoreMIDI.framework`、`CoreAudioKit`
 - `Info.plist` 将在构建后期处理时自动调整。
     - 附加属性： `NSBluetoothAlwaysUsageDescription`
-## Android
+## PostProcessing: Android
 - `AndroidManifest.xml`  将在构建后处理时自动调整。
     - 附加权限： `android.permission.BLUETOOTH`, `android.permission.BLUETOOTH_ADMIN`, `android.permission.ACCESS_FINE_LOCATION`, `android.permission.BLUETOOTH_SCAN`, `android.permission.BLUETOOTH_CONNECT`, `android.permission.BLUETOOTH_ADVERTISE`.
-    - 附加功能： `android.hardware.bluetooth_le`
+    - 附加功能： `android.hardware.bluetooth_le`, `android.hardware.usb.host`
+-  如果您想在 Oculus(Meta) Quest 2 上使用 USB MIDI 功能，请在下方取消注释以检测 USB MIDI 设备连接。
 
+`PostProcessBuild.cs` 的部分
+```cs
+    public class ModifyAndroidManifest : IPostGenerateGradleAndroidProject
+    {
+        public void OnPostGenerateGradleAndroidProject(string basePath)
+        {
+            :
+
+            // androidManifest.AddUsbIntentFilterForOculusDevices(); // 为 Oculus Quest 2 取消注释此行
+```
 <div class="page" />
 
 # 实现功能
@@ -310,6 +322,14 @@ if (sequence.GetTickLength() > 0)
 ```
 **<p style="text-align: center;">图 11 写入 SMF</p>**
 
+## Android: 使用 CompanionDeviceManager 查找 BLE MIDI 设备
+您可以使用 [CompanionDeviceManager](https://developer.android.com/guide/topics/connectivity/companion-device-pairing) 在 Android 上连接 BLE MIDI 设备。
+
+要启用此功能，请将 `FEATURE_ANDROID_COMPANION_DEVICE` 添加到 `Scripting Define Symbols` 设置。
+```
+Project Settings > Other Settings > Script Compilation > Scripting Define Symbols
+```
+
 <div class="page" />
 
 # 测试设备
@@ -321,6 +341,7 @@ if (sequence.GetTickLength() > 0)
 - MIDI 设备:
     - Quicco mi.1 (BLE MIDI)
     - Miselu C.24 (BLE MIDI)
+    - TAHORNG Elefue (BLE MIDI)
     - Roland UM-ONE (USB MIDI)
         - 注意：此设备不适用于 iOS。
     - Gakken NSX-39 (USB-MIDI)
@@ -357,6 +378,15 @@ if (sequence.GetTickLength() > 0)
     - 添加对 Unity Editor OSX、Windows、Linux 的支持
     - 将 Sequencer 实现从 Thread 更改为 Coroutine
     - 修复 iOS/OSX 设备附加/分离问题
+- v1.3.1 修正版本
+    - [Issue connecting to Quest 2 via cable](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/1)
+    - [Sample scene stops working.](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/5)
+    - [Byte is obsolete on android](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/8)
+    - [Any way of negotiating MTU?](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/9)
+    - [Can't get it to work on iOS](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/10)
+    - [Have errors with sample scene](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/11)
+    - Android 权限请求问题
+    - 添加对 Android CompanionDeviceManager 支持
 
 <div class="page" />
 
