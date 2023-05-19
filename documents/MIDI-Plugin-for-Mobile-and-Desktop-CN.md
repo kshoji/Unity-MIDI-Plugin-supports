@@ -387,6 +387,9 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - [Have errors with sample scene](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/11)
     - Android 权限请求问题
     - 添加对 Android CompanionDeviceManager 支持
+- v1.3.2 修正版本
+    - 修复 Android 上的编译错误
+    - 修复 播放 SMF 时 MIDI 事件的顺序
 
 <div class="page" />
 

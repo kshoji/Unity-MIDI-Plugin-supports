@@ -391,6 +391,9 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - [Have errors with sample scene](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/11)
     - Androidのパーミッション要求についての問題を解消
     - AndroidのCompanionDeviceManager経由での接続をサポート
+- v1.3.2 バグ修正
+    - Androidのコンパイルエラーを修正
+    - SMF再生時のMIDIイベントの順序が正しくなるよう修正
 
 <div class="page" />
 

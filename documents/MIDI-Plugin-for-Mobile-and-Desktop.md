@@ -380,6 +380,9 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - [Have errors with sample scene](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/11)
     - Android permissions requesting issue
     - Add: Android CompanionDeviceManager support
+- v1.3.2 Bugfix release
+    - Fixed Android compile error
+    - Fixed MIDI event order while playing SMF sequence
 
 <div class="page" />
 
