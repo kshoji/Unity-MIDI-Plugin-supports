@@ -394,6 +394,8 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
 - v1.3.2 バグ修正
     - Androidのコンパイルエラーを修正
     - SMF再生時のMIDIイベントの順序が正しくなるよう修正
+- v1.3.3 バグ修正
+    - WebGLのMIDI送信失敗を修正
 
 <div class="page" />
 

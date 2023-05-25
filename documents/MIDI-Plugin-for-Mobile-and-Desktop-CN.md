@@ -390,6 +390,8 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
 - v1.3.2 修正版本
     - 修复 Android 上的编译错误
     - 修复 播放 SMF 时 MIDI 事件的顺序
+- v1.3.3 修正版本
+    - 修复 WebGL 上 MIDI 发送失败
 
 <div class="page" />
 

@@ -383,6 +383,8 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
 - v1.3.2 Bugfix release
     - Fixed Android compile error
     - Fixed MIDI event order while playing SMF sequence
+- v1.3.3 Bugfix release
+    - Fixed WebGL MIDI sending failure
 
 <div class="page" />
 
