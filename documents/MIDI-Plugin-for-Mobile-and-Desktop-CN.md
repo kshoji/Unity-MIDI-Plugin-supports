@@ -392,6 +392,11 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - 修复 播放 SMF 时 MIDI 事件的顺序
 - v1.3.3 修正版本
     - 修复 WebGL 上 MIDI 发送失败
+- v1.3.4 修正版本
+    - 修复：与之前连接的设备ID相同但设备名称不同的设备时，获取到错误的设备名称。
+    - iOS: 将“完成”按钮添加到 BLE MIDI 搜索弹出框
+    - Sample scene: BLE MIDI 扫描功能仅限 Android/iOS
+    - MidiManager 单例模式细化
 
 <div class="page" />
 

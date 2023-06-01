@@ -385,6 +385,11 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - Fixed MIDI event order while playing SMF sequence
 - v1.3.3 Bugfix release
     - Fixed WebGL MIDI sending failure
+- v1.3.4 Bugfix release
+    - Fixed: The wrong device name was acquired when a device with the same device ID as the previously connected device but with a different device name.
+    - iOS: Add 'Done' button to the BLE MIDI searching popover
+    - Sample scene: BLE MIDI Scan feature is Android/iOS only
+    - MidiManager singleton pattern refined
 
 <div class="page" />
 
