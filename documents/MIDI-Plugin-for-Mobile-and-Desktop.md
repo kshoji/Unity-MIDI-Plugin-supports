@@ -19,6 +19,7 @@ This document explains how to install the plugin, and to use the plugin's featur
     - [Terminating Plugin](#terminating-plugin)
     - [Work with RTP-MIDI (experimental feature for non-iOS platforms)](#work-with-rtp-midi-experimental-feature-for-non-ios-platforms)
     - [MIDI device attaching/detaching event handling](#midi-device-attachingdetaching-event-handling)
+    - [Get MIDI device information with the deviceId](#get-midi-device-information-with-the-deviceid)
     - [MIDI Event Receiving](#midi-event-receiving)
     - [MIDI Event Sending](#midi-event-sending)
     - [Creating and start using a Sequencer](#creating-and-start-using-a-sequencer)
@@ -216,6 +217,27 @@ public void OnMidiOutputDeviceDetached(string deviceId)
 ```
 **<p style="text-align: center;">Fig.4 device attach/detach events handler  
 All codes are found at `Assets/MIDI/Samples/Scripts/MidiSampleScene.cs` file.</p>**
+
+## Get MIDI device information with the deviceId
+- Call `MidiManager.Instance.GetDeviceName(string deviceId)` method to get the device name of the specified device id.
+- Call `MidiManager.Instance.GetVendorId(string deviceId)` method to get the vendor id of the specified device id.
+    - Some platform or kinds of MIDI connection(BLE MIDI, RTP MIDI) are not supported, so the empty string will be returned with these environments.
+- Call `MidiManager.Instance.GetProductId(string deviceId)` method to get the product id of the specified device id.
+    - Some platform or kinds of MIDI connection(BLE MIDI, RTP MIDI) are not supported, so the empty string will be returned with these environments.
+
+After the device being disconnected, these method returns empty string.
+
+### Platform availability of GetVendorId / GetProductId method
+
+| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) |
+| ---- | ---- | ---- | ---- |
+| iOS | - | ○ | - |
+| Android | - | ○ | - |
+| Universal Windows Platform | - | ○ | - |
+| Standalone OSX, Unity Editor OSX | - | ○ | - |
+| Standalone Linux, Unity Editor Linux | - | - | - |
+| Standalone Windows, Unity Editor Windows | - | ○ | - |
+| WebGL | - | △ (GetVendorId only) | - |
 
 <div class="page" />
 
