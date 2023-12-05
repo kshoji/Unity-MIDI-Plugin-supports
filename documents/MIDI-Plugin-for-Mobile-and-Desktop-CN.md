@@ -28,6 +28,7 @@
     - [记录一个 Sequence](#记录一个-sequence)
     - [将序列写入 SMF 文件](#将序列写入-smf-文件)
     - [Android: 使用 CompanionDeviceManager 查找 BLE MIDI 设备](#android-使用-companiondevicemanager-查找-ble-midi-设备)
+    - [Android, iOS, macOS: 使用Nearby Connections MIDI](#android-ios-macos-使用nearby-connections-midi)
 - [测试设备](#测试设备)
 - [版本历史](#版本历史)
 - [联系](#联系)
@@ -46,20 +47,23 @@
 
 下面列出了每个平台可用的 MIDI 接口。
 
-| 平台 | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) |
-| ---- | ---- | ---- | ---- |
-| iOS | ○ | ○ | ○ |
-| Android | ○ | ○ | △(实验特征) |
-| Universal Windows Platform | - | ○ | △(实验特征) |
-| Standalone OSX, Unity Editor OSX | ○ | ○ | ○ |
-| Standalone Linux, Unity Editor Linux | ○ | ○ | △(实验特征) |
-| Standalone Windows, Unity Editor Windows | - | ○ | △(实验特征) |
-| WebGL | ○ | ○ | - |
+| 平台 | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) | Nearby Connections MIDI |
+| ---- | ---- | ---- | ---- | ---- |
+| iOS | ○ | ○ | ○ | ○ |
+| Android | ○ | ○ | △(实验特征) | ○ |
+| Universal Windows Platform | - | ○ | △(实验特征) | - |
+| Standalone OSX, Unity Editor OSX | ○ | ○ | ○ | ○ |
+| Standalone Linux, Unity Editor Linux | ○ | ○ | △(实验特征) | - |
+| Standalone Windows, Unity Editor Windows | - | ○ | △(实验特征) | - |
+| WebGL | ○ | ○ | - | - |
 
 ## 关于限制
 ### Android
 - API 级别 12 (Android 3.1) 或更高版本支持 USB MIDI。
 - API 级别 18 (Android 4.3) 或更高版本支持蓝牙 MIDI。
+- 使用 `Mono backend` 构建会导致延迟问题，并且仅支持 `armeabi-v7a` 架构。
+    - 要解决此问题，请将 Unity 设置 `Project Settings > Player > Configuration > Scripting Backend` 更改为 `IL2CPP` 。
+- 要使用 Nearby Connections MIDI 功能，需要 API 级别 28 或更高版本。 要使用此功能，您的应用必须在 API 级别 33 (Android 13.0) 或更高版本上进行编译。
 
 ### iOS / OSX
 - 支持 iOS 11.0 或更高版本。
@@ -225,6 +229,55 @@ public void OnMidiOutputDeviceDetached(string deviceId)
 
 <div class="page" />
 
+## 从deviceId获取MIDI设备信息
+- 调用 `MidiManager.Instance.GetDeviceName(string deviceId)` 方法从指定的设备ID中获取设备名称。
+- 调用 `MidiManager.Instance.GetVendorId(string deviceId)` 方法从指定的设备ID中获取供应商ID。
+    - 某些平台/MIDI 连接类型（BLE MIDI、RTP MIDI）不支持它。 在这些环境中将返回空字符串。
+- 调用 `MidiManager.Instance.GetProductId(string deviceId)` 方法从指定的设备ID中获取产品ID。
+    - 某些平台/MIDI 连接类型（BLE MIDI、RTP MIDI）不支持它。 在这些环境中将返回空字符串。
+
+如果设备断开连接，这些方法将返回空字符串。
+
+### GetVendorId / GetProductId方法可以使用的环境
+
+| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) | Nearby Connections MIDI |
+| ---- | ---- | ---- | ---- | ---- |
+| iOS | ○ | ○ | - | - |
+| Android | ○ | ○ | - | - |
+| Universal Windows Platform | - | ○ | - | - |
+| Standalone OSX, Unity Editor OSX | ○ | ○ | - | - |
+| Standalone Linux, Unity Editor Linux | - | - | - | - |
+| Standalone Windows, Unity Editor Windows | - | ○ | - | - |
+| WebGL | - | △ (GetVendorId only) | - | - |
+
+### VendorId示例
+不同平台由于API不同，获取到的VendorId也不同。
+
+| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) | Nearby Connections MIDI |
+| ---- | ---- | ---- | ---- | ---- |
+| iOS | QUICCO SOUND Corp. | Generic | - | - |
+| Android | QUICCO SOUND Corp. | 1410 | - | - |
+| Universal Windows Platform | - | VID_0582 | - | - |
+| Standalone OSX, Unity Editor OSX | QUICCO SOUND Corp. | Generic | - | - |
+| Standalone Linux, Unity Editor Linux | - | - | - | - |
+| Standalone Windows, Unity Editor Windows | - | 1 | - | - |
+| WebGL | - | Microsoft Corporation | - | - |
+
+<div class="page" />
+
+### ProductId示例
+不同平台由于API不同，获取到的ProductId也不同。
+
+| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) | Nearby Connections MIDI |
+| ---- | ---- | ---- | ---- | ---- |
+| iOS | mi.1 | USB2.0-MIDI | - | - |
+| Android | mi.1 | 298 | - | - |
+| Universal Windows Platform | - | PID_012A | - | - |
+| Standalone OSX, Unity Editor OSX | mi.1 | USB2.0-MIDI | - | - |
+| Standalone Linux, Unity Editor Linux | - | - | - | - |
+| Standalone Windows, Unity Editor Windows | - | 102 | - | - |
+| WebGL | - | - | - | - |
+
 ## MIDI 信号接收
 1. 实现信号接收接口，用 `IMidiEventHandler.cs` 源码编写，命名为 `IMidiXXXXXEventHandler`。
     - 如果要接收 Note On 信号，请实现 `IMidiNoteOnEventHandler` 接口。
@@ -332,8 +385,35 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
 
 <div class="page" />
 
+## Android, iOS, macOS: 使用Nearby Connections MIDI
+使用 Google 的 Nearby Connections 库发送和接收 MIDI  
+(目前这是一个专有的实现，与类似的库不兼容。)  
+
+
+### 添加依赖包
+打开 Unity 的 Package Manager 视图，按左上角的 `+` 按钮，然后选择 `Add package from git URL…` 项。
+指定以下 URL。  
+`ssh://git@github.com/kshoji/Nearby-Connections-for-Unity.git`  
+
+### Scripting Define Symbol设置
+要启用 Nearby Connections MIDI 功能，请在Player Settings中添加Scripting Define Symbol。  
+`ENABLE_NEARBY_CONNECTIONS`  
+
+### Android设置
+将 Unity 的 `Project Settings > Player > Identification > Target API Level` 设置为 `API Level 33` 或更高版本。  
+
+### 向附近的设备发布广告
+调用 `MidiManager.Instance.StartNearbyAdvertising()` 方法将您的设备通告给附近的设备。  
+要停止广告，请调用 `MidiManager.Instance.StopNearbyAdvertising()` 方法。  
+
+### 找到您广告的设备
+调用 `MidiManager.Instance.StartNearbyDiscovering()` 方法来发现附近连接 MIDI 设备。  
+要停止搜索，请调用 `MidiManager.Instance.StopNearbyDiscovering()` 方法。  
+
+<div class="page" />
+
 # 测试设备
-- Android: Pixel 4a, Oculus Quest2
+- Android: Pixel 7, Oculus Quest2
 - iOS: iPod touch 7th gen
 - UWP/Standalone Windows/Unity Editor Windows: Surface Go 2
 - Standalone OSX/Unity Editor OSX: Mac mini 3,1
@@ -397,6 +477,10 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - iOS: 将“完成”按钮添加到 BLE MIDI 搜索弹出框
     - Sample scene: BLE MIDI 扫描功能仅限 Android/iOS
     - MidiManager 单例模式细化
+- v1.4.0 更新版本
+    - 追加: 对 Android、iOS、macOS 的 Nearby Connections MIDI 支持
+    - 追加: 对 WebGL 的 蓝牙 LE MIDI 支持
+    - 修正: 修复了在 iOS 设备上连接/断开设备时错误的回调。
 
 <div class="page" />
 
@@ -421,6 +505,7 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
 
 ## 其他人使用的示例 MIDI 数据
 指定为 UnityWebRequest 的 URL 源。不包括 SMF 二进制文件。
+由于原网站不提供 `https` 服务，因此示例代码指定了另一个网站的URL。(https://bitmidi.com/uploads/14947.mid)
 
 - Prelude and Fugue in C minor BWV 847 Music by J.S. Bach
     - The MIDI, audio(MP3, OGG) and video files of Bernd Krueger are licensed under the cc-by-sa Germany License.

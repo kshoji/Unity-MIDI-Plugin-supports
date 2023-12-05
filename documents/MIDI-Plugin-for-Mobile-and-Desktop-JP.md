@@ -26,6 +26,7 @@
     - [シーケンスを記録する](#シーケンスを記録する)
     - [シーケンスをSMFとして書き出す](#シーケンスをsmfとして書き出す)
     - [Android: BLE MIDIデバイスの検索にCompanionDeviceManagerを使う](#android-ble-midiデバイスの検索にcompaniondevicemanagerを使う)
+    - [Android, iOS, macOS: Nearby Connections MIDIの利用](#android-ios-macos-nearby-connections-midiの利用)
 - [テストしたデバイス](#テストしたデバイス)
 - [バージョン履歴](#バージョン履歴)
 - [連絡先](#連絡先)
@@ -44,20 +45,23 @@
 
 各プラットフォームで対応しているMIDIインタフェースは下記の通りです。
 
-| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) |
-| ---- | ---- | ---- | ---- |
-| iOS | ○ | ○ | ○ |
-| Android | ○ | ○ | △(試験的に対応) |
-| Universal Windows Platform | - | ○ | △(試験的に対応) |
-| Standalone OSX, Unity Editor OSX | ○ | ○ | ○ |
-| Standalone Linux, Unity Editor Linux | ○ | ○ | △(試験的に対応) |
-| Standalone Windows, Unity Editor Windows | - | ○ | △(試験的に対応) |
-| WebGL | ○ | ○ | - |
+| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) | Nearby Connections MIDI |
+| ---- | ---- | ---- | ---- | ---- |
+| iOS | ○ | ○ | ○ | ○ |
+| Android | ○ | ○ | △(試験的に対応) | ○ |
+| Universal Windows Platform | - | ○ | △(試験的に対応) | - |
+| Standalone OSX, Unity Editor OSX | ○ | ○ | ○ | ○ |
+| Standalone Linux, Unity Editor Linux | ○ | ○ | △(試験的に対応) | - |
+| Standalone Windows, Unity Editor Windows | - | ○ | △(試験的に対応) | - |
+| WebGL | ○ | ○ | - | - |
 
 ## 制限事項
 ### Android
 - USB MIDI は API Level 12 (Android 3.1) 以上で利用できます。
 - Bluetooth MIDI は API Level 18 (Android 4.3) 以上で利用できます。
+- `Mono backend` でのビルドでは遅延の問題が発生し、 `armeabi-v7a` アーキテクチャしかサポートされません。
+    - この問題を解消するためには、Unityの設定 `Project Settings > Player > Configuration > Scripting Backend` を `IL2CPP` に変更します。
+- Nearby Connections MIDI の機能を使う場合はAPI Level 28以降が必要です。この機能を使う場合、アプリは API Level 33 (Android 13.0) 以上でコンパイルする必要があります。
 
 ### iOS / OSX
 - iOS 11.0 以上で動作します。
@@ -226,6 +230,55 @@ public void OnMidiOutputDeviceDetached(string deviceId)
 **<p style="text-align: center;">図4 デバイスの接続・切断イベント処理  
 コードの全容は `Assets/MIDI/Samples/Scripts/MidiSampleScene.cs` ファイルにあります。</p>**
 
+## deviceIdからMIDIデバイスの情報を取得する
+- `MidiManager.Instance.GetDeviceName(string deviceId)` メソッドを呼び出して、指定されたデバイスIDからデバイス名を取得します。
+- `MidiManager.Instance.GetVendorId(string deviceId)` メソッドを呼び出して、指定されたデバイスIDからベンダーIDを取得します。
+    - いくつかのプラットフォーム・MIDIの接続種別(BLE MIDI, RTP MIDI)ではサポートされていません。これらの環境では空文字列が返却されます。
+- `MidiManager.Instance.GetProductId(string deviceId)` メソッドを呼び出して、指定されたデバイスIDからプロダクトIDを取得します。
+    - いくつかのプラットフォーム・MIDIの接続種別(BLE MIDI, RTP MIDI)ではサポートされていません。これらの環境では空文字列が返却されます。
+
+デバイスが切断された場合には、これらのメソッドは空文字列を返却します。
+
+### GetVendorId / GetProductIdメソッドが利用可能な環境
+
+| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) | Nearby Connections MIDI |
+| ---- | ---- | ---- | ---- | ---- |
+| iOS | ○ | ○ | - | - |
+| Android | ○ | ○ | - | - |
+| Universal Windows Platform | - | ○ | - | - |
+| Standalone OSX, Unity Editor OSX | ○ | ○ | - | - |
+| Standalone Linux, Unity Editor Linux | - | - | - | - |
+| Standalone Windows, Unity Editor Windows | - | ○ | - | - |
+| WebGL | - | △ (GetVendorId only) | - | - |
+
+### VendorIdの例
+APIが異なるため、プラットフォームによって取得されるVendorIdが異なります。
+
+| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) | Nearby Connections MIDI |
+| ---- | ---- | ---- | ---- | ---- |
+| iOS | QUICCO SOUND Corp. | Generic | - | - |
+| Android | QUICCO SOUND Corp. | 1410 | - | - |
+| Universal Windows Platform | - | VID_0582 | - | - |
+| Standalone OSX, Unity Editor OSX | QUICCO SOUND Corp. | Generic | - | - |
+| Standalone Linux, Unity Editor Linux | - | - | - | - |
+| Standalone Windows, Unity Editor Windows | - | 1 | - | - |
+| WebGL | - | Microsoft Corporation | - | - |
+
+<div class="page" />
+
+### ProductIdの例
+APIが異なるため、プラットフォームによって取得されるProductIdが異なります。
+
+| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) | Nearby Connections MIDI |
+| ---- | ---- | ---- | ---- | ---- |
+| iOS | mi.1 | USB2.0-MIDI | - | - |
+| Android | mi.1 | 298 | - | - |
+| Universal Windows Platform | - | PID_012A | - | - |
+| Standalone OSX, Unity Editor OSX | mi.1 | USB2.0-MIDI | - | - |
+| Standalone Linux, Unity Editor Linux | - | - | - | - |
+| Standalone Windows, Unity Editor Windows | - | 102 | - | - |
+| WebGL | - | - | - | - |
+
 <div class="page" />
 
 ## MIDIイベントの受信
@@ -336,8 +389,34 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
 
 <div class="page" />
 
+## Android, iOS, macOS: Nearby Connections MIDIの利用
+GoogleのNearby Connectionsライブラリを使ったMIDIの送受信です。  
+(現状ではこれは独自実装のため、類似のライブラリとの互換性はありません)  
+
+### 依存パッケージの追加
+UnityのPackage Managerビューを開き、左上にある `+` ボタンを押し、 `Add package from git URL…` メニューを選択します。  
+以下のURLを指定します。  
+`ssh://git@github.com/kshoji/Nearby-Connections-for-Unity.git`  
+
+### Scripting Define Symbolの設定
+Nearby Connections MIDIの機能を有効にするには、Player settingsにてScripting Define Symbolを追加します。  
+`ENABLE_NEARBY_CONNECTIONS`  
+
+### Android向けの設定
+Unityの `Project Settings > Player > Identification > Target API Level` 設定を `API Level 33` 以上に設定します。  
+
+### 近隣のデバイスへの広報(Advertise)
+近隣のデバイスに対して自分のデバイスを広報するために、 `MidiManager.Instance.StartNearbyAdvertising()` メソッドを呼びます。  
+広報を停止するには、 `MidiManager.Instance.StopNearbyAdvertising()` メソッドを呼びます。  
+
+### 広報されたデバイスを見つける
+Nearby Connections MIDIデバイスを見つけるために、 `MidiManager.Instance.StartNearbyDiscovering()` メソッドを呼びます。  
+探索を止めるには、 `MidiManager.Instance.StopNearbyDiscovering()` メソッドを呼びます。  
+
+<div class="page" />
+
 # テストしたデバイス
-- Android: Pixel 4a, Oculus Quest2
+- Android: Pixel 7, Oculus Quest2
 - iOS: iPod touch 7th gen
 - UWP/Standalone Windows/Unity Editor Windows: Surface Go 2
 - Standalone OSX/Unity Editor OSX: Mac mini 3,1
@@ -401,6 +480,10 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - iOS: BLE MIDIデバイス検索のポップアップに「完了」ボタンを追加
     - サンプルシーン: BLE MIDIデバイスの検索は Android/iOS のみ使えるよう調整
     - MidiManager のシングルトンの設計を調整
+- v1.4.0 更新リリース
+    - 追加: Android, iOS, macOS向けの Nearby Connections MIDI サポート
+    - 追加: WebGL向けの Bluetooth LE MIDI サポート
+    - 修正: iOSデバイスでの デバイス接続/切断時のコールバックが間違っていたのを修正
 
 <div class="page" />
 
@@ -425,6 +508,7 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
 
 ## 他者提供による、使用したサンプルMIDIデータ
 UnityWebRequest's URLとして指定しています。SMFのバイナリデータ自体はパッケージには含まれていません。
+オリジナルのウェブサイトが `https` のサービスを提供していないため、サンプルコードでは別のサイトのURLを指定しています。(https://bitmidi.com/uploads/14947.mid)
 
 - Prelude and Fugue in C minor BWV 847 Music by J.S. Bach
     - The MIDI, audio(MP3, OGG) and video files of Bernd Krueger are licensed under the cc-by-sa Germany License.
