@@ -19,6 +19,7 @@ This document explains how to install the plugin, and to use the plugin's featur
     - [Terminating Plugin](#terminating-plugin)
     - [Work with RTP-MIDI (experimental feature for non-iOS platforms)](#work-with-rtp-midi-experimental-feature-for-non-ios-platforms)
     - [MIDI device attaching/detaching event handling](#midi-device-attachingdetaching-event-handling)
+    - [Get MIDI device information with the deviceId](#get-midi-device-information-with-the-deviceid)
     - [MIDI Event Receiving](#midi-event-receiving)
     - [MIDI Event Sending](#midi-event-sending)
     - [Creating and start using a Sequencer](#creating-and-start-using-a-sequencer)
@@ -26,6 +27,7 @@ This document explains how to install the plugin, and to use the plugin's featur
     - [Record a sequence](#record-a-sequence)
     - [Write the sequence to a SMF file](#write-the-sequence-to-a-smf-file)
     - [Android: Use CompanionDeviceManager to find BLE MIDI devices](#android-use-companiondevicemanager-to-find-ble-midi-devices)
+    - [Android, iOS, macOS: Using Nearby Connections MIDI](#android-ios-macos-using-nearby-connections-midi)
 - [Tested devices](#tested-devices)
 - [Version History](#version-history)
 - [Contacts](#contacts)
@@ -43,24 +45,29 @@ Currently implemented `MIDI 1.0 protocol` only.
 
 The available MIDI interfaces for each platforms are listed below.
 
-| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) |
-| ---- | ---- | ---- | ---- |
-| iOS | ○ | ○ | ○ |
-| Android | ○ | ○ | △(experimental) |
-| Universal Windows Platform | - | ○ | △(experimental) |
-| Standalone OSX, Unity Editor OSX | ○ | ○ | ○ |
-| Standalone Linux, Unity Editor Linux | ○ | ○ | △(experimental) |
-| Standalone Windows, Unity Editor Windows | - | ○ | △(experimental) |
-| WebGL | ○ | ○ | - |
+| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) | Nearby Connections MIDI |
+| ---- | ---- | ---- | ---- | ---- |
+| iOS | ○ | ○ | ○ | ○ |
+| Android | ○ | ○ | △(experimental) | ○ |
+| Universal Windows Platform | - | ○ | △(experimental) | - |
+| Standalone OSX, Unity Editor OSX | ○ | ○ | ○ | ○ |
+| Standalone Linux, Unity Editor Linux | ○ | ○ | △(experimental) | - |
+| Standalone Windows, Unity Editor Windows | - | ○ | △(experimental) | - |
+| WebGL | ○ | ○ | - | - |
 
 ## About limitations
 ### Android
 - USB MIDI is supported API Level 12 (Android 3.1) or above.
 - Bluetooth MIDI is supported API Level 18 (Android 4.3) or above.
+- Build with `Mono backend` causes latency issue, and it supports only `armeabi-v7a` architecture.
+    - To fix this problem, change Unity's `Project Settings > Player > Configuration > Scripting Backend` config to `IL2CPP`.
+- Nearby Connections MIDI feature requires API Level 28 or above. And with this feature, the app should be compiled with API Level 33 (Android 13.0) or above.
 
 ### iOS / OSX
 - Supported iOS version 11.0 or above.
 - Bluetooth MIDI support is Central mode only.
+
+<div class="page" />
 
 ### UWP
 - Supported UWP platform version 10.0.10240.0 or above.
@@ -217,6 +224,55 @@ public void OnMidiOutputDeviceDetached(string deviceId)
 **<p style="text-align: center;">Fig.4 device attach/detach events handler  
 All codes are found at `Assets/MIDI/Samples/Scripts/MidiSampleScene.cs` file.</p>**
 
+## Get MIDI device information with the deviceId
+- Call `MidiManager.Instance.GetDeviceName(string deviceId)` method to get the device name of the specified device id.
+- Call `MidiManager.Instance.GetVendorId(string deviceId)` method to get the vendor id of the specified device id.
+    - Some platform or kinds of MIDI connection(BLE MIDI, RTP MIDI) are not supported, so the empty string will be returned with these environments.
+- Call `MidiManager.Instance.GetProductId(string deviceId)` method to get the product id of the specified device id.
+    - Some platform or kinds of MIDI connection(BLE MIDI, RTP MIDI) are not supported, so the empty string will be returned with these environments.
+
+After the device being disconnected, these method returns empty string.
+
+### Availability of GetVendorId / GetProductId method
+
+| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) | Nearby Connections MIDI |
+| ---- | ---- | ---- | ---- | ---- |
+| iOS | ○ | ○ | - | - |
+| Android | ○ | ○ | - | - |
+| Universal Windows Platform | - | ○ | - | - |
+| Standalone OSX, Unity Editor OSX | ○ | ○ | - | - |
+| Standalone Linux, Unity Editor Linux | - | - | - | - |
+| Standalone Windows, Unity Editor Windows | - | ○ | - | - |
+| WebGL | - | △ (GetVendorId only) | - | - |
+
+### VendorId examples
+Since the API differs depending on the platform, the obtained VendorId will differ.
+
+| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) | Nearby Connections MIDI |
+| ---- | ---- | ---- | ---- | ---- |
+| iOS | QUICCO SOUND Corp. | Generic | - | - |
+| Android | QUICCO SOUND Corp. | 1410 | - | - |
+| Universal Windows Platform | - | VID_0582 | - | - |
+| Standalone OSX, Unity Editor OSX | QUICCO SOUND Corp. | Generic | - | - |
+| Standalone Linux, Unity Editor Linux | - | - | - | - |
+| Standalone Windows, Unity Editor Windows | - | 1 | - | - |
+| WebGL | - | Microsoft Corporation | - | - |
+
+<div class="page" />
+
+### ProductId examples
+Since the API differs depending on the platform, the obtained ProductId will differ.
+
+| Platform | Bluetooth MIDI | USB MIDI | Network MIDI (RTP-MIDI) | Nearby Connections MIDI |
+| ---- | ---- | ---- | ---- | ---- |
+| iOS | mi.1 | USB2.0-MIDI | - | - |
+| Android | mi.1 | 298 | - | - |
+| Universal Windows Platform | - | PID_012A | - | - |
+| Standalone OSX, Unity Editor OSX | mi.1 | USB2.0-MIDI | - | - |
+| Standalone Linux, Unity Editor Linux | - | - | - | - |
+| Standalone Windows, Unity Editor Windows | - | 102 | - | - |
+| WebGL | - | - | - | - |
+
 <div class="page" />
 
 ## MIDI Event Receiving
@@ -325,8 +381,34 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
 
 <div class="page" />
 
+## Android, iOS, macOS: Using Nearby Connections MIDI
+The MIDI transfer using Google's Nearby Connections library.  
+(At this stage, this is a proprietary implementation, and has no interoperability with other similar libraries.)  
+
+### Add dependency package
+Open the Unity's Package Manager view, push the `+` button on top-left corner, and select `Add package from git URL…` menu.  
+Then specify the URLs below:  
+`ssh://git@github.com/kshoji/Nearby-Connections-for-Unity.git`  
+
+### Specify Scripting Define Symbol
+To enable Nearby Connections MIDI feature, add a Scripting Define Symbol to Player settings.  
+`ENABLE_NEARBY_CONNECTIONS`  
+
+### Setting for Android
+Change Unity's `Project Settings > Player > Identification > Target API Level` to `API Level 33` or higher.  
+
+### Advertise the nearby devices
+To advertise the device to nearby, call the `MidiManager.Instance.StartNearbyAdvertising()` method.  
+To stop the advertising, call the `MidiManager.Instance.StopNearbyAdvertising()` method.  
+
+### Discover the advertising devices
+To discover the Nearby Connections MIDI devices, call the `MidiManager.Instance.StartNearbyDiscovering()` method.  
+To stop the discovering, call the `MidiManager.Instance.StopNearbyDiscovering()` method.  
+
+<div class="page" />
+
 # Tested devices
-- Android: Pixel 4a, Oculus Quest2
+- Android: Pixel 7, Oculus Quest2
 - iOS: iPod touch 7th gen
 - UWP/Standalone Windows/Unity Editor Windows: Surface Go 2
 - Standalone OSX/Unity Editor OSX: Mac mini 3,1
@@ -390,6 +472,10 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - iOS: Add 'Done' button to the BLE MIDI searching popover
     - Sample scene: BLE MIDI Scan feature is Android/iOS only
     - MidiManager singleton pattern refined
+- v1.4.0 Update release
+    - Add: Nearby Connections MIDI feature for Android, iOS, macOS
+    - Add: Bluetooth LE MIDI feature for WebGL
+    - Fixed: iOS device attach/detach callback has mismatches
 
 <div class="page" />
 
@@ -413,7 +499,8 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
 - Unity MIDI Plugin OSX: [https://github.com/kshoji/Unity-MIDI-Plugin-OSX](https://github.com/kshoji/Unity-MIDI-Plugin-OSX)
 
 ## Used example MIDI data by others
-specified as UnityWebRequest's URL source. The SMF binary file is not included.
+Specified as UnityWebRequest's URL source. The SMF binary file is not included.
+The original website below has no `https` services, so the sample code specifies the another site's URL(https://bitmidi.com/uploads/14947.mid).
 
 - Prelude and Fugue in C minor BWV 847 Music by J.S. Bach
     - The MIDI, audio(MP3, OGG) and video files of Bernd Krueger are licensed under the cc-by-sa Germany License.
