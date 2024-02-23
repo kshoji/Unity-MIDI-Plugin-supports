@@ -109,6 +109,7 @@ Modified: add global `unityInstance` variable.
 
 # How to install plugin
 1. Import the unitypackage from the Asset Store view.
+    - If the package has been updated, some older file versions are installed at `Assets/MIDI/Plugins/Android`. If you find them, please remove all older versions' aar files.
 1. Select the app's platform; iOS or Android. and build the sample app.
     - The sample scene is found at Assets/MIDI/Samples directory.
 
@@ -256,7 +257,7 @@ Since the API differs depending on the platform, the obtained VendorId will diff
 | Standalone OSX, Unity Editor OSX | QUICCO SOUND Corp. | Generic | - | - |
 | Standalone Linux, Unity Editor Linux | - | - | - | - |
 | Standalone Windows, Unity Editor Windows | - | 1 | - | - |
-| WebGL | - | Microsoft Corporation | - | - |
+| WebGL | QUICCO SOUND Corp. | Microsoft Corporation | - | - |
 
 <div class="page" />
 
@@ -271,7 +272,7 @@ Since the API differs depending on the platform, the obtained ProductId will dif
 | Standalone OSX, Unity Editor OSX | mi.1 | USB2.0-MIDI | - | - |
 | Standalone Linux, Unity Editor Linux | - | - | - | - |
 | Standalone Windows, Unity Editor Windows | - | 102 | - | - |
-| WebGL | - | - | - | - |
+| WebGL | mi.1 | UM-ONE | - | - |
 
 <div class="page" />
 
@@ -412,7 +413,7 @@ To stop the discovering, call the `MidiManager.Instance.StopNearbyDiscovering()`
 - iOS: iPod touch 7th gen
 - UWP/Standalone Windows/Unity Editor Windows: Surface Go 2
 - Standalone OSX/Unity Editor OSX: Mac mini 3,1
-- Standalone Linux/Unity Editor Linux: Ubuntu 20.04 on VirtualBox
+- Standalone Linux/Unity Editor Linux: Ubuntu 22.04 on VirtualBox
 - MIDI devices:
     - Quicco mi.1 (BLE MIDI)
     - Miselu C.24 (BLE MIDI)
@@ -476,6 +477,11 @@ To stop the discovering, call the `MidiManager.Instance.StopNearbyDiscovering()`
     - Add: Nearby Connections MIDI feature for Android, iOS, macOS
     - Add: Bluetooth LE MIDI feature for WebGL
     - Fixed: iOS device attach/detach callback has mismatches
+- v1.4.1 Update release
+    - Fixed: [The link error at Linux platform](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/16)
+    - Add: Vendor name / device name support for WebGL platform.
+    - Add: [Inter App MIDI connections(virtual MIDI) support for iOS/MacOS/Linux/Android](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/18)
+    - Fixed: Memory leak issue on Sample scene.
 
 <div class="page" />
 
@@ -491,6 +497,7 @@ To stop the discovering, call the `MidiManager.Instance.StopNearbyDiscovering()`
 ## Used Open Source Softwares created by me:
 - Android Bluetooth MIDI library: [https://github.com/kshoji/BLE-MIDI-for-Android](https://github.com/kshoji/BLE-MIDI-for-Android)
 - Android USB MIDI library: [https://github.com/kshoji/USB-MIDI-Driver](https://github.com/kshoji/USB-MIDI-Driver)
+- Unity MIDI Plugin Android (Inter App MIDI): [https://github.com/kshoji/Unity-MIDI-Plugin-Android-Inter-App](https://github.com/kshoji/Unity-MIDI-Plugin-Android-Inter-App)
 - iOS MIDI library: [https://github.com/kshoji/Unity-MIDI-Plugin-iOS](https://github.com/kshoji/Unity-MIDI-Plugin-iOS)
 - MidiSystem for .NET(sequencer, SMF importer/exporter): [https://github.com/kshoji/MidiSystem-for-.NET](https://github.com/kshoji/MidiSystem-for-.NET)
 - RTP-MIDI for .NET: [https://github.com/kshoji/RTP-MIDI-for-.NET](https://github.com/kshoji/RTP-MIDI-for-.NET)
