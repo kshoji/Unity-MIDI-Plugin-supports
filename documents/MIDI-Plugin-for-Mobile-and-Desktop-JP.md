@@ -107,6 +107,7 @@
 
 # プラグインのインストール
 1. アセットストアViewからunitypackageをインポートします。
+    - パッケージを更新した場合、 `Assets/MIDI/Plugins/Android` に古いバージョンのファイルがある場合があります。その場合は古いバージョンのaarファイルをすべて削除してください。
 1. プラットフォーム(iOSやAndroid)を選択して、サンプルアプリをビルドします。
     - サンプルシーンは Assets/MIDI/Samples ディレクトリにあります。
 
@@ -262,7 +263,7 @@ APIが異なるため、プラットフォームによって取得されるVendo
 | Standalone OSX, Unity Editor OSX | QUICCO SOUND Corp. | Generic | - | - |
 | Standalone Linux, Unity Editor Linux | - | - | - | - |
 | Standalone Windows, Unity Editor Windows | - | 1 | - | - |
-| WebGL | - | Microsoft Corporation | - | - |
+| WebGL | QUICCO SOUND Corp. | Microsoft Corporation | - | - |
 
 <div class="page" />
 
@@ -277,7 +278,7 @@ APIが異なるため、プラットフォームによって取得されるProdu
 | Standalone OSX, Unity Editor OSX | mi.1 | USB2.0-MIDI | - | - |
 | Standalone Linux, Unity Editor Linux | - | - | - | - |
 | Standalone Windows, Unity Editor Windows | - | 102 | - | - |
-| WebGL | - | - | - | - |
+| WebGL | mi.1 | UM-ONE | - | - |
 
 <div class="page" />
 
@@ -420,7 +421,7 @@ Nearby Connections MIDIデバイスを見つけるために、 `MidiManager.Inst
 - iOS: iPod touch 7th gen
 - UWP/Standalone Windows/Unity Editor Windows: Surface Go 2
 - Standalone OSX/Unity Editor OSX: Mac mini 3,1
-- Standalone Linux/Unity Editor Linux: Ubuntu 20.04 on VirtualBox
+- Standalone Linux/Unity Editor Linux: Ubuntu 22.04 on VirtualBox
 - MIDI devices:
     - Quicco mi.1 (BLE MIDI)
     - Miselu C.24 (BLE MIDI)
@@ -484,6 +485,11 @@ Nearby Connections MIDIデバイスを見つけるために、 `MidiManager.Inst
     - 追加: Android, iOS, macOS向けの Nearby Connections MIDI サポート
     - 追加: WebGL向けの Bluetooth LE MIDI サポート
     - 修正: iOSデバイスでの デバイス接続/切断時のコールバックが間違っていたのを修正
+- v1.4.1 バグ修正
+    - 修正: [Linuxプラットフォームでのリンクエラーを修正](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/16)
+    - 追加: WebGLプラットフォームでベンダ名/デバイス名をサポート
+    - 追加: [iOS/MacOS/Linux/Android プラットフォームでアプリ間MIDI接続(仮想MIDI)をサポート](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/18)
+    - 修正: サンプルシーンのメモリリークを修正
 
 <div class="page" />
 
@@ -499,6 +505,7 @@ Nearby Connections MIDIデバイスを見つけるために、 `MidiManager.Inst
 ## 使用した自作のオープンソースソフトウェア
 - Android Bluetooth MIDI library: [https://github.com/kshoji/BLE-MIDI-for-Android](https://github.com/kshoji/BLE-MIDI-for-Android)
 - Android USB MIDI library: [https://github.com/kshoji/USB-MIDI-Driver](https://github.com/kshoji/USB-MIDI-Driver)
+- Unity MIDI Plugin Android (Inter App MIDI): [https://github.com/kshoji/Unity-MIDI-Plugin-Android-Inter-App](https://github.com/kshoji/Unity-MIDI-Plugin-Android-Inter-App)
 - iOS MIDI library: [https://github.com/kshoji/Unity-MIDI-Plugin-iOS](https://github.com/kshoji/Unity-MIDI-Plugin-iOS)
 - MidiSystem for .NET(sequencer, SMF importer/exporter): [https://github.com/kshoji/MidiSystem-for-.NET](https://github.com/kshoji/MidiSystem-for-.NET)
 - RTP-MIDI for .NET: [https://github.com/kshoji/RTP-MIDI-for-.NET](https://github.com/kshoji/RTP-MIDI-for-.NET)

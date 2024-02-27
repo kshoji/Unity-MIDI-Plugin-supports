@@ -109,6 +109,7 @@
 
 # 安装插件
 1. 从 Asset Store 视图导入 unitypackage。
+    - 如果您更新了软件包，则 `Assets/MIDI/Plugins/Android` 中可能有旧版本的文件。 在这种情况下，请删除所有旧版本的aar文件。
 1. 选择应用的平台； iOS 或安卓。并构建示例应用程序。
     - 示例场景位于 Assets/MIDI/Samples 目录中。
 
@@ -261,7 +262,7 @@ public void OnMidiOutputDeviceDetached(string deviceId)
 | Standalone OSX, Unity Editor OSX | QUICCO SOUND Corp. | Generic | - | - |
 | Standalone Linux, Unity Editor Linux | - | - | - | - |
 | Standalone Windows, Unity Editor Windows | - | 1 | - | - |
-| WebGL | - | Microsoft Corporation | - | - |
+| WebGL | QUICCO SOUND Corp. | Microsoft Corporation | - | - |
 
 <div class="page" />
 
@@ -276,7 +277,7 @@ public void OnMidiOutputDeviceDetached(string deviceId)
 | Standalone OSX, Unity Editor OSX | mi.1 | USB2.0-MIDI | - | - |
 | Standalone Linux, Unity Editor Linux | - | - | - | - |
 | Standalone Windows, Unity Editor Windows | - | 102 | - | - |
-| WebGL | - | - | - | - |
+| WebGL | mi.1 | UM-ONE | - | - |
 
 ## MIDI 信号接收
 1. 实现信号接收接口，用 `IMidiEventHandler.cs` 源码编写，命名为 `IMidiXXXXXEventHandler`。
@@ -417,7 +418,7 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
 - iOS: iPod touch 7th gen
 - UWP/Standalone Windows/Unity Editor Windows: Surface Go 2
 - Standalone OSX/Unity Editor OSX: Mac mini 3,1
-- Standalone Linux/Unity Editor Linux: Ubuntu 20.04 on VirtualBox
+- Standalone Linux/Unity Editor Linux: Ubuntu 22.04 on VirtualBox
 - MIDI 设备:
     - Quicco mi.1 (BLE MIDI)
     - Miselu C.24 (BLE MIDI)
@@ -480,7 +481,12 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
 - v1.4.0 更新版本
     - 追加: 对 Android、iOS、macOS 的 Nearby Connections MIDI 支持
     - 追加: 对 WebGL 的 蓝牙 LE MIDI 支持
-    - 修正: 修复了在 iOS 设备上连接/断开设备时错误的回调。
+    - 修复: 了在 iOS 设备上连接/断开设备时错误的回调。
+- v1.4.1 修正版本
+    - 修复: [Linux平台下链接错误](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/16)
+    - 追加: WebGL 平台添加了对供应商名称和设备名称的支持
+    - 追加: [iOS/MacOS/Linux/Android 上的应用程序间 MIDI 连接（Virtual MIDI）支持](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/18)
+    - 修复: 了示例场景中的内存泄漏
 
 <div class="page" />
 
@@ -496,6 +502,7 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
 ## 使用的开源软件由我创建
 - Android Bluetooth MIDI library: [https://github.com/kshoji/BLE-MIDI-for-Android](https://github.com/kshoji/BLE-MIDI-for-Android)
 - Android USB MIDI library: [https://github.com/kshoji/USB-MIDI-Driver](https://github.com/kshoji/USB-MIDI-Driver)
+- Unity MIDI Plugin Android (Inter App MIDI): [https://github.com/kshoji/Unity-MIDI-Plugin-Android-Inter-App](https://github.com/kshoji/Unity-MIDI-Plugin-Android-Inter-App)
 - iOS MIDI library: [https://github.com/kshoji/Unity-MIDI-Plugin-iOS](https://github.com/kshoji/Unity-MIDI-Plugin-iOS)
 - MidiSystem for .NET(sequencer, SMF importer/exporter): [https://github.com/kshoji/MidiSystem-for-.NET](https://github.com/kshoji/MidiSystem-for-.NET)
 - RTP-MIDI for .NET: [https://github.com/kshoji/RTP-MIDI-for-.NET](https://github.com/kshoji/RTP-MIDI-for-.NET)
