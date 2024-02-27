@@ -482,6 +482,8 @@ To stop the discovering, call the `MidiManager.Instance.StopNearbyDiscovering()`
     - Add: Vendor name / device name support for WebGL platform.
     - Add: [Inter App MIDI connections(virtual MIDI) support for iOS/MacOS/Linux/Android](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/18)
     - Fixed: Memory leak issue on Sample scene.
+- v1.4.2 Bugfix release
+    - Fixed: WebGL Sample scene fails to initialize
 
 <div class="page" />
 

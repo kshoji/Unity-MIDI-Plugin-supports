@@ -482,11 +482,13 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - 追加: 对 Android、iOS、macOS 的 Nearby Connections MIDI 支持
     - 追加: 对 WebGL 的 蓝牙 LE MIDI 支持
     - 修复: 了在 iOS 设备上连接/断开设备时错误的回调。
-- v1.4.1 修正版本
+- v1.4.1 更新版本
     - 修复: [Linux平台下链接错误](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/16)
     - 追加: WebGL 平台添加了对供应商名称和设备名称的支持
     - 追加: [iOS/MacOS/Linux/Android 上的应用程序间 MIDI 连接（Virtual MIDI）支持](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/18)
     - 修复: 了示例场景中的内存泄漏
+- v1.4.2 修正版本
+    - 修正: WebGL Sample scene初始化失败
 
 <div class="page" />
 
