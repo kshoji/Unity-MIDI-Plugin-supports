@@ -485,11 +485,13 @@ Nearby Connections MIDIデバイスを見つけるために、 `MidiManager.Inst
     - 追加: Android, iOS, macOS向けの Nearby Connections MIDI サポート
     - 追加: WebGL向けの Bluetooth LE MIDI サポート
     - 修正: iOSデバイスでの デバイス接続/切断時のコールバックが間違っていたのを修正
-- v1.4.1 バグ修正
+- v1.4.1 更新リリース
     - 修正: [Linuxプラットフォームでのリンクエラーを修正](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/16)
     - 追加: WebGLプラットフォームでベンダ名/デバイス名をサポート
     - 追加: [iOS/MacOS/Linux/Android プラットフォームでアプリ間MIDI接続(仮想MIDI)をサポート](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/18)
     - 修正: サンプルシーンのメモリリークを修正
+- v1.4.2 バグ修正
+    - 修正: WebGLのサンプルシーンの初期化が失敗する
 
 <div class="page" />
 
