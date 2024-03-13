@@ -484,6 +484,17 @@ To stop the discovering, call the `MidiManager.Instance.StopNearbyDiscovering()`
     - Fixed: Memory leak issue on Sample scene.
 - v1.4.2 Bugfix release
     - Fixed: WebGL Sample scene fails to initialize
+- v1.4.3 Bugfix release
+    - Fixed: Android plugin initialization fails when Bluetooth is off
+    - Fixed: Fails opening USB MIDI devices on Android 14
+    - Fixed: Windows plugin fails updating MIDI devices
+    - Fixed: Linux plugin crashes at terminating MidiManager
+    - Fixed: Unity Editor stops MIDI feature after stopping the game play
+    - Added: Feature to get input/output deviceIds(separated from getting all deviceId set method)
+    - Added: Feature to specify device connections to the MIDI sequencer
+    - Added: The callback to receive MIDI sequencer playback finished event
+    - Added: MIDI sequencer's event timing accuracy improved
+    - Added: MIDI sequencer's playback position can be specified with the microseconds time
 
 <div class="page" />
 
