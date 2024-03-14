@@ -488,7 +488,18 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - 追加: [iOS/MacOS/Linux/Android 上的应用程序间 MIDI 连接（Virtual MIDI）支持](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/18)
     - 修复: 了示例场景中的内存泄漏
 - v1.4.2 修正版本
-    - 修正: WebGL Sample scene初始化失败
+    - 修复: WebGL Sample scene初始化失败
+- v1.4.3 修正版本
+    - 修复: 如果蓝牙关闭，Android 插件初始化失败
+    - 修复: 在 Android 14 上无法打开 USB MIDI 设备
+    - 修复: Windows 插件无法更新 MIDI 设备
+    - 修复: 退出 MidiManager 时 Linux 插件崩溃
+    - 修复: Unity 编辑器在停止游戏后停止 MIDI 功能
+    - 追加: 获取输入/输出deviceId的能力（与所有deviceId获取方法分开添加）
+    - 追加: 能够指定与 MIDI 音序器的设备连接
+    - 追加: 接收 MIDI 音序器播放结束事件的回调
+    - 追加: 改进了 MIDI 音序器事件计时的准确性
+    - 追加: 现在可以以微秒为单位指定 MIDI 音序器播放位置。
 
 <div class="page" />
 
