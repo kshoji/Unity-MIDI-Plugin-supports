@@ -495,6 +495,10 @@ To stop the discovering, call the `MidiManager.Instance.StopNearbyDiscovering()`
     - Added: The callback to receive MIDI sequencer playback finished event
     - Added: MIDI sequencer's event timing accuracy improved
     - Added: MIDI sequencer's playback position can be specified with the microseconds time
+- v1.4.4 Bugfix release
+    - Fixed: The initialization is interrupted when Android plug-in fails loading.
+    - Fixed: Android Bluetooth MIDI can't send MIDI messages.
+    - Added: The ProGuard minify configuration support for Android platform.
 
 <div class="page" />
 

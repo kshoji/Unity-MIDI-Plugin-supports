@@ -500,6 +500,10 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - 追加: 接收 MIDI 音序器播放结束事件的回调
     - 追加: 改进了 MIDI 音序器事件计时的准确性
     - 追加: 现在可以以微秒为单位指定 MIDI 音序器播放位置。
+- v1.4.4 修正版本
+    - 修复: Android插件加载失败时初始化中断
+    - 修复: Android蓝牙MIDI无法发送MIDI消息
+    - 追加: Android平台支持ProGuard minify配置
 
 <div class="page" />
 
