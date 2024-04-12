@@ -503,6 +503,10 @@ Nearby Connections MIDIデバイスを見つけるために、 `MidiManager.Inst
     - 追加: MIDI シーケンサーの再生終了イベントを受信するコールバック
     - 追加: MIDI シーケンサーのイベント タイミングの精度を向上
     - 追加: MIDI シーケンサーの再生位置をマイクロ秒時間で指定できるように
+- v1.4.4 バグ修正
+    - 修正: Androidプラグインのロードが失敗した時に初期化が中断される
+    - 修正: AndroidのBluetooth MIDIがMIDIメッセージを送信できない
+    - 追加: AndroidプラットフォームでProGuard minify設定のサポート
 
 <div class="page" />
 
