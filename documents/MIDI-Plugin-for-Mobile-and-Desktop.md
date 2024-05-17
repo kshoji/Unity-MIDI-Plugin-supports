@@ -499,6 +499,10 @@ To stop the discovering, call the `MidiManager.Instance.StopNearbyDiscovering()`
     - Fixed: The initialization is interrupted when Android plug-in fails loading.
     - Fixed: Android Bluetooth MIDI can't send MIDI messages.
     - Added: The ProGuard minify configuration support for Android platform.
+- v1.4.5 Bugfix release
+    - Fixed: Android Bluetooth MIDI lose sending MIDI messages under high load.
+    - Updated: Use Android's newer Bluetooth LE APIs.
+    - Fixed: Android CompanionDeviceManager initialization issues. From this version, the feature requests `ACCESS_FINE_LOCATION` permission.
 
 <div class="page" />
 

@@ -504,6 +504,10 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - 修复: Android插件加载失败时初始化中断
     - 修复: Android蓝牙MIDI无法发送MIDI消息
     - 追加: Android平台支持ProGuard minify配置
+- v1.4.5 修正版本
+    - 修复: Android Bluetooth MIDI 在重负载时无法发送
+    - 更新: 支持使用Android新的蓝牙LE API
+    - 修复: Android 上 CompanionDeviceManager 初始化的问题。 从该版本开始，此功能需要 `ACCESS_FINE_LOCATION` 权限。
 
 <div class="page" />
 

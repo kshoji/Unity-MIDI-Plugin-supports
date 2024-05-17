@@ -507,6 +507,10 @@ Nearby Connections MIDIデバイスを見つけるために、 `MidiManager.Inst
     - 修正: Androidプラグインのロードが失敗した時に初期化が中断される
     - 修正: AndroidのBluetooth MIDIがMIDIメッセージを送信できない
     - 追加: AndroidプラットフォームでProGuard minify設定のサポート
+- v1.4.5 バグ修正
+    - 修正: AndroidのBluetooth MIDIが高負荷のときに送信に失敗する
+    - 更新: Androidの新しいBluetooth LEのAPIを使うよう対応
+    - 修正: AndroidのCompanionDeviceManager初期化に関する問題を修正。本バージョンから、この機能には `ACCESS_FINE_LOCATION` パーミッションが必要になります。
 
 <div class="page" />
 
