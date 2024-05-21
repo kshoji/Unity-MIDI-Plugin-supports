@@ -106,7 +106,7 @@
     - 或者，将 `MIDI/Samples/WebGLTemplates` 文件复制到 `Assets/WebGLTemplates`，然后从 `Project Settings > Player > Resolution and Presentation > WebGL Template` 设置中选择 `Default-MIDI` 或 `Minimal-MIDI` 模板。
     - 有关更多信息，请参阅 [WebGL 模板的 Unity 官方文档](https://docs.unity3d.com/Manual/webgl-templates.html)。
 
-原文:
+摘自原始代码:
 ```js
 script.onload = () => {
 createUnityInstance(canvas, config, (progress) => {
@@ -367,6 +367,7 @@ if (GUILayout.Button("NoteOn"))
 
 ### 创建并开始使用 Sequence
 ```cs
+// 创建并打开一个新的定序器实例
 var isSequencerOpened = false;
 var sequencer = new SequencerImpl(() => { isSequencerOpened = true; });
 sequencer.Open();
@@ -375,14 +376,18 @@ sequencer.Open();
 
 ### 将 SMF 读取为 Sequence，并播放它
 ```cs
+// 反映音序器上当前连接的 MIDI 输入/输出设备的信息。
 sequencer.UpdateDeviceConnections();
 
+// 从 FileStream 加载 SMF 并将其设置到定序器。
 using var stream = new FileStream(smfPath, FileMode.Open, FileAccess.Read);
 sequencer.SetSequence(stream);
+// 播放序列。
 sequencer.Start();
 
 ...
 
+// 停止播放。
 sequencer.Stop();
 ```
 
@@ -393,12 +398,12 @@ sequencer.UpdateDeviceConnections();
 
 // 添加新的录制序列。
 sequencer.SetSequence(new Sequence(Sequence.Ppq, 480));
-// 开始录制 MIDI 数据。
+// 开始将 MIDI 数据记录到序列中。
 sequencer.StartRecording();
 
 ...
 
-// 停止录制 MIDI 数据。
+// 停止录制。
 sequencer.Stop();
 ```
 
@@ -410,6 +415,7 @@ var sequence = sequencer.GetSequence();
 // 检查序列长度
 if (sequence.GetTickLength() > 0)
 {
+    // 将序列导出为 SMF。
     using var stream = new FileStream(recordedSmfPath, FileMode.Create, FileAccess.Write);
     MidiSystem.WriteSequence(sequence, stream);
 }
@@ -576,6 +582,7 @@ if (isNearbyAdvertising)
 {
     if (GUILayout.Button("Stop advertise Nearby MIDI devices"))
     {
+        // 停止广告。
         MidiManager.Instance.StopNearbyAdvertising();
         isNearbyAdvertising = false;
     }
@@ -584,6 +591,7 @@ else
 {
     if (GUILayout.Button("Advertise Nearby MIDI devices"))
     {
+        // 开始向附近的设备投放广告。
         MidiManager.Instance.StartNearbyAdvertising();
         isNearbyAdvertising = true;
     }
@@ -601,6 +609,7 @@ if (isNearbyDiscovering)
 {
     if (GUILayout.Button("Stop discover Nearby MIDI devices"))
     {
+        // 停止发现设备。
         MidiManager.Instance.StopNearbyDiscovering();
         isNearbyDiscovering = false;
     }
@@ -609,6 +618,7 @@ else
 {
     if (GUILayout.Button("Discover Nearby MIDI devices"))
     {
+        // 开始搜索您附近广告中的设备。
         MidiManager.Instance.StartNearbyDiscovering();
         isNearbyDiscovering = true;
     }

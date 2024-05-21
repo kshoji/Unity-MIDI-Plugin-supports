@@ -106,7 +106,7 @@
     - もしくは、 `MIDI/Samples/WebGLTemplates` のファイルを `Assets/WebGLTemplates` にコピーし、 `Project Settings > Player > Resolution and Presentation > WebGL Template` の設定から、 `Default-MIDI` か `Minimal-MIDI` のテンプレートを選択します。
     - 詳しくは、[Unity公式のWebGL Templatesドキュメント](https://docs.unity3d.com/Manual/webgl-templates.html) を参照してください。
 
-オリジナルの抜粋:
+オリジナルコードの抜粋:
 ```js
 script.onload = () => {
 createUnityInstance(canvas, config, (progress) => {
@@ -367,6 +367,7 @@ if (GUILayout.Button("NoteOn"))
 
 ### シーケンサーの作成と開始
 ```cs
+// 新しいシーケンサーのインスタンスを作成し、開く
 var isSequencerOpened = false;
 var sequencer = new SequencerImpl(() => { isSequencerOpened = true; });
 sequencer.Open();
@@ -375,14 +376,18 @@ sequencer.Open();
 
 ### SMFをシーケンスとして読み出し、再生する
 ```cs
+// シーケンサーに、現在接続されているMIDI入出力デバイスの情報を反映します。
 sequencer.UpdateDeviceConnections();
 
+// FileStreamからSMFを読み込み、シーケンサーに設定します。
 using var stream = new FileStream(smfPath, FileMode.Open, FileAccess.Read);
 sequencer.SetSequence(stream);
+// シーケンスを再生します。
 sequencer.Start();
 
 ...
 
+// 再生を停止します。
 sequencer.Stop();
 ```
 
@@ -393,12 +398,12 @@ sequencer.UpdateDeviceConnections();
 
 // 記録するための新しいシーケンスを追加します。
 sequencer.SetSequence(new Sequence(Sequence.Ppq, 480));
-// MIDIデータの記録を開始します。
+// シーケンスへのMIDIデータの記録を開始します。
 sequencer.StartRecording();
 
 ...
 
-// MIDIデータの記録を停止します。
+// 記録を停止します。
 sequencer.Stop();
 ```
 
@@ -410,6 +415,7 @@ var sequence = sequencer.GetSequence();
 // シーケンスの長さをチェック
 if (sequence.GetTickLength() > 0)
 {
+    // シーケンスをSMFとして書き出します。
     using var stream = new FileStream(recordedSmfPath, FileMode.Create, FileAccess.Write);
     MidiSystem.WriteSequence(sequence, stream);
 }
@@ -576,6 +582,7 @@ if (isNearbyAdvertising)
 {
     if (GUILayout.Button("Stop advertise Nearby MIDI devices"))
     {
+        // 広報を停止します。
         MidiManager.Instance.StopNearbyAdvertising();
         isNearbyAdvertising = false;
     }
@@ -584,6 +591,7 @@ else
 {
     if (GUILayout.Button("Advertise Nearby MIDI devices"))
     {
+        // 近隣のデバイスに広報を開始します。
         MidiManager.Instance.StartNearbyAdvertising();
         isNearbyAdvertising = true;
     }
@@ -601,6 +609,7 @@ if (isNearbyDiscovering)
 {
     if (GUILayout.Button("Stop discover Nearby MIDI devices"))
     {
+        // デバイスの探索を停止します。
         MidiManager.Instance.StopNearbyDiscovering();
         isNearbyDiscovering = false;
     }
@@ -609,6 +618,7 @@ else
 {
     if (GUILayout.Button("Discover Nearby MIDI devices"))
     {
+        // 近隣で広報しているデバイスの探索を開始します。
         MidiManager.Instance.StartNearbyDiscovering();
         isNearbyDiscovering = true;
     }

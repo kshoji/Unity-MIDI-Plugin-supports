@@ -106,7 +106,7 @@ The available MIDI interfaces for each platforms are listed below.
     - Or, copy `MIDI/Samples/WebGLTemplates` files to `Assets/WebGLTemplates`, and select `Default-MIDI` or `Minimal-MIDI` template from `Project Settings > Player > Resolution and Presentation > WebGL Template` setting.
     - For more information, see [Unity official document of WebGL Templates](https://docs.unity3d.com/Manual/webgl-templates.html).
 
-Original:
+Part of original code:
 ```js
 script.onload = () => {
 createUnityInstance(canvas, config, (progress) => {
@@ -368,6 +368,7 @@ The library has a sequencer feature, ported from `javax.sound.midi` package clas
 ### Creating and start using a Sequencer
 ```cs
 var isSequencerOpened = false;
+// Create a new Sequence instance, and open it
 var sequencer = new SequencerImpl(() => { isSequencerOpened = true; });
 sequencer.Open();
 ```
@@ -375,14 +376,18 @@ All codes are found at `Assets/MIDI/Samples/Scripts/MidiSampleScene.cs` file.
 
 ### Read SMF as a Sequence, and play it
 ```cs
+// Apply currently connected MIDI input/output devices to the sequencer
 sequencer.UpdateDeviceConnections();
 
+// Load a SMF from FileStream, and set it to Sequencer
 using var stream = new FileStream(smfPath, FileMode.Open, FileAccess.Read);
 sequencer.SetSequence(stream);
+// Start to play sequence
 sequencer.Start();
 
 ...
 
+// Stop playing
 sequencer.Stop();
 ```
 
@@ -393,12 +398,12 @@ sequencer.UpdateDeviceConnections();
 
 // Add a new sequence to record
 sequencer.SetSequence(new Sequence(Sequence.Ppq, 480));
-// Starts the recording MIDI data
+// Start recording MIDI data to the sequence
 sequencer.StartRecording();
 
 ...
 
-// Stops the recording MIDI data
+// Stop recording
 sequencer.Stop();
 ```
 
@@ -410,6 +415,7 @@ var sequence = sequencer.GetSequence();
 // Check the sequence length
 if (sequence.GetTickLength() > 0)
 {
+    // Write the sequence to a SMF file
     using var stream = new FileStream(recordedSmfPath, FileMode.Create, FileAccess.Write);
     MidiSystem.WriteSequence(sequence, stream);
 }
@@ -576,6 +582,7 @@ if (isNearbyAdvertising)
 {
     if (GUILayout.Button("Stop advertise Nearby MIDI devices"))
     {
+        // Stop advertising
         MidiManager.Instance.StopNearbyAdvertising();
         isNearbyAdvertising = false;
     }
@@ -584,6 +591,7 @@ else
 {
     if (GUILayout.Button("Advertise Nearby MIDI devices"))
     {
+        // Start advertising to nearby
         MidiManager.Instance.StartNearbyAdvertising();
         isNearbyAdvertising = true;
     }
@@ -601,6 +609,7 @@ if (isNearbyDiscovering)
 {
     if (GUILayout.Button("Stop discover Nearby MIDI devices"))
     {
+        // Stop discovering nearby devices
         MidiManager.Instance.StopNearbyDiscovering();
         isNearbyDiscovering = false;
     }
@@ -609,6 +618,7 @@ else
 {
     if (GUILayout.Button("Discover Nearby MIDI devices"))
     {
+        // Start discovering nearby advertising devices
         MidiManager.Instance.StartNearbyDiscovering();
         isNearbyDiscovering = true;
     }
