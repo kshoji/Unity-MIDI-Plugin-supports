@@ -791,3 +791,4 @@ The original website below has no `https` services, so the sample code specifies
     - Totally refactored internal implements
     - Updated: Improved SMF reading compativility
     - Fixed: SMF playback fails around the first MIDI event
+    - Fixed: Android input device initialization issue

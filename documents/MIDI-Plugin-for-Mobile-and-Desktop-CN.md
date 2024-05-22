@@ -791,3 +791,4 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - 完全重构内部实现
     - 更新: 改进了 SMF 加载兼容性
     - 修复: SMF 播放在接近开始事件时失败
+    - 修复: Android 输入设备初始化失败
