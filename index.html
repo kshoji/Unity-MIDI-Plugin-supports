@@ -3,12 +3,121 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Midi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Unity MIDI Plugin for Mobile and Desktop | Sample Scene Demo</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+SC:wght@300;1,87.5,100..900&display=swap" rel="stylesheet">
   </head>
   <body>
+    <script>
+      function setLanguage(evt, name) {
+        var i;
+        var x = document.getElementsByClassName("language");
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        var activebtn = document.getElementsByClassName("language-tab-button");
+        for (i = 0; i < activebtn.length; i++) {
+          activebtn[i].className = activebtn[i].className.replace(" language-tab-dark-grey", "");
+        }
+        document.getElementById(name).style.display = "block";
+        document.getElementById(name + "2").style.display = "block";
+        evt.currentTarget.className += " language-tab-dark-grey";
+      }
+    </script>
+    <div class="language-tab-bar tablink language-tab-light-grey intronav">
+      <button class="language-tab-bar-item language-tab-button en language-tab-dark-grey" onclick="setLanguage(event, 'en')">English</button>
+      <button class="language-tab-bar-item language-tab-button ja" onclick="setLanguage(event, 'ja')">日本語</button>
+      <button class="language-tab-bar-item language-tab-button cn" onclick="setLanguage(event, 'cn')">简体中文（翻译）</button>
+    </div>
+
+    <img src="https://raw.githubusercontent.com/kshoji/Unity-MIDI-Plugin-supports/main/images/card-image.png" alt="Unity MIDI Plugin card image" style="float: bottom" /><br />
+
+    <div id="en" class="language en">
+      <h3>Unity MIDI Plugin for Mobile and Desktop</h3>
+      MIDI Plugin for Mobile, Desktop, and WebGL.<br />
+      This asset add MIDI functions to your apps, such as transeiving MIDI events, playing/recording MIDI sequence and import/export SMF midi files.<br />
+      <br />
+      Avaliable on the Unity Asset Store!<br/>
+      <a href="https://assetstore.unity.com/packages/slug/198917"><button class="button blue-button">Unity MIDI Plugin for Mobile and Desktop</button></a><br />
+
+      <h3>Features</h3>
+      <ul>
+        <li>Can connect with BLE MIDI(iOS, Android, OSX, Linux, WebGL), USB MIDI(Android, UWP, OSX, Linux, Windows, WebGL), Network MIDI(except for WebGL) devices.</li>
+        <li>Transfer all MIDI 1.0 events with MIDI devices.</li>
+        <li>Transfer MIDI Polyphonic Expression(MPE) messages. (experimental)</li>
+        <li>Can implement apps for all available platforms with the same script interface.</li>
+        <li>MIDI event sending with wrapped C# functions.</li>
+        <li>MIDI event receiving with Unity Event System.</li>
+        <li>MIDI sequencer feature enables playing / recording SMF sequence, also has SMF reading / writing features.</li>
+        <li>Supports Inter App MIDI connections(virtual MIDI) for iOS/MacOS/Linux/Android</li></li>
+      </ul>
+
+      <h3>WebGL Demo</h3>
+      This asset's sample scene with WebGL platform build.<br />
+      This demo site can handle USB/Bluetooth MIDI devices, and show received events from them.<br />
+      <a href="#demo"><button id="demo-link" class="unity-desktop">Show the WebGL Demo</button></a>
+    </div>
+
+    <div id="ja" class="language ja" style="display:none">
+      <h3>Unity MIDI Plugin for Mobile and Desktop</h3>
+      モバイル・デスクトップ・WebGLに対応したMIDIプラグインです。<br />
+      MIDIイベントの送受信、シーケンスの録音再生、SMFファイルへのインポート・エクスポートなど、アプリにMIDI機能を追加します。<br />
+      <br />
+      Unity Asset Storeで提供中です。<br/>
+      <a href="https://assetstore.unity.com/packages/slug/198917"><button class="button blue-button">Unity MIDI Plugin for Mobile and Desktop</button></a><br />
+
+      <h3>機能一覧</h3>
+      <ul>
+        <li>MIDIデバイスと接続できます。BLE MIDI(iOS, Android, OSX, Linux, WebGL), USB MIDI(Android, UWP, OSX, Linux, Windows, WebGL), ネットワークMIDI(WebGL以外)に対応しています。</li>
+        <li>全てのMIDI 1.0イベントの送受信に対応しています。</li>
+        <li>MIDI Polyphonic Expression(MPE)メッセージの送受信に対応しています。 (試験的な実装)</li>
+        <li>実行時パーミッション要求に対応しています。必要なタイミングでシステムUIのポップアップが表示されます。</li>
+        <li>C#の関数からMIDIイベントを送信できます。</li>
+        <li>UnityのEvent Systemを利用してMIDIイベントを受信できます。</li>
+        <li>MIDIシーケンサ機能により、シーケンスの記録、再生ができます。</li>
+        <li>SMFファイルの読み書きができます。</li>
+        <li>iOS/MacOS/Linux/Android プラットフォームでアプリ間MIDI接続(仮想MIDI)に対応しています。</li>
+      </ul>
+
+      <h3>WebGLデモ</h3>
+      サンプルシーンをWebGLプラットフォームでビルドしたものです。<br />
+      USB/BluetoothのMIDIデバイスを扱うことができ、受信したイベントが表示されます。<br />
+      <a href="#demo"><button id="demo-link" class="unity-desktop">WebGLデモを開く</button></a>
+    </div>
+
+    <div id="cn" class="language cn" style="display:none">
+      <h3>Unity MIDI Plugin for Mobile and Desktop</h3>
+      该资产增加了接收/发送 MIDI 数据的能力，和播放/录制 SMF。<br />
+      支持移动平台（iOS、Android、UWP）、桌面（Mac、Win、Linux）和WebGL。<br />
+      <br />
+      可在 Unity Asset Store 上购买！<br/>
+      <a href="https://assetstore.unity.com/packages/slug/198917"><button class="button blue-button">Unity MIDI Plugin for Mobile and Desktop</button></a><br />
+
+      <h3>特点</h3>
+      <ul>
+        <li>可连接BLE MIDI（iOS、Android、OSX、Linux、WebGL）、USB MIDI（Android、UWP、OSX、Linux、Windows、WebGL）、网络MIDI（WebGL除外）设备。</li>
+        <li>连接 MIDI 设备，并通过设备传输所有 MIDI 1.0 数据。</li>
+        <li>传输 MIDI 和弦表达 (MPE) 消息。 （实验特征）</li>
+        <li>使用运行时权限授予。 如果应用程序需要权限，将显示系统弹出窗口。</li>
+        <li>使用包装的 C# 函数发送 MIDI 数据。</li>
+        <li>使用 Unity Event System 接收 MIDI 数据。</li>
+        <li>MIDI 音序器功能，它可以播放/录制 MIDI 音序。</li>
+        <li>SMF 读/写功能</li>
+        <li>支持 iOS/MacOS/Linux/Android 的 Inter App MIDI 连接（Virtual MIDI）</li>
+      </ul>
+
+      <h3>WebGL 演示</h3>
+      此资产的示例场景使用 WebGL 平台构建。<br />
+      这个演示站点可以处理 USB/蓝牙 MIDI 设备，并显示从它们接收到的事件。<br />
+      <a href="#demo"><button id="demo-link" class="unity-desktop">显示 WebGL 演示</button></a>
+    </div>
+
     <div id="unity-container" class="unity-desktop">
+      <a name="demo"></a>
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
@@ -23,6 +132,42 @@
         <div id="unity-build-title">Midi</div>
       </div>
     </div>
+
+    <div id="en2" class="language en">
+      <h3>Support</h3>
+      <ul>
+        <li><a href="https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues">github issues</a> If you have any questions or issues, please post an issue on GitHub.</li>
+        <li><a href="https://github.com/kshoji/Unity-MIDI-Plugin-supports/blob/main/documents/MIDI-Plugin-for-Mobile-and-Desktop.md">Documents</a></li>
+      </ul>
+    </div>
+
+    <div id="ja2" class="language ja" style="display:none">
+      <h3>サポート</h3>
+      <ul>
+        <li><a href="https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues">github issues</a> 質問や問題があればGitHubのissueまで ご投稿ください。</li>
+        <li><a href="https://github.com/kshoji/Unity-MIDI-Plugin-supports/blob/main/documents/MIDI-Plugin-for-Mobile-and-Desktop-JP.md">ドキュメント</a></li>
+      </ul>
+    </div>
+
+    <div id="cn2" class="language cn" style="display:none">
+      <h3>支持</h3>
+      <ul>
+        <li><a href="https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues">github issues</a> 如果有任何问题或问题，请在 GitHub 上发布问题。</li>
+        <li><a href="https://github.com/kshoji/Unity-MIDI-Plugin-supports/blob/main/documents/MIDI-Plugin-for-Mobile-and-Desktop-CN.md">讲解书</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>About sample MIDI data:</h3> The default sample data is specified as below. You can change to another URL(https scheme required).<br />
+      <em>Prelude and Fugue in C minor BWV 847 Music by J.S. Bach</em><br />
+      <br />
+The MIDI, audio(MP3, OGG) and video files of Bernd Krueger are licensed under the cc-by-sa Germany License.<br />
+This means, that you can use and adapt the files, as long as you attribute to the copyright holder<br />
+Name: Bernd Krueger<br />
+Source: <a href="http://www.piano-midi.de">http://www.piano-midi.de</a><br />
+The distribution or public playback of the files is only allowed under identical license conditions.
+    </div>
+
     <script>
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
@@ -30,6 +175,8 @@
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var fullscreenButton = document.querySelector("#unity-fullscreen-button");
       var warningBanner = document.querySelector("#unity-warning");
+
+      var demoLinks = document.querySelectorAll("#demo-link");
 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
@@ -85,6 +232,10 @@
         container.className = "unity-mobile";
         canvas.className = "unity-mobile";
 
+        for (let i = 0; i < demoLinks.length; i++) {
+          demoLinks[i].className = "unity-mobile";
+        }
+
         // To lower canvas resolution on mobile devices to gain some
         // performance, uncomment the following line:
         // config.devicePixelRatio = 1;
@@ -117,14 +268,5 @@
       };
       document.body.appendChild(script);
     </script>
-    <h3>About sample MIDI data:</h3>
-    <em>Prelude and Fugue in C minor BWV 847 Music by J.S. Bach</em><br />
-    <pre>
-The MIDI, audio(MP3, OGG) and video files of Bernd Krueger are licensed under the cc-by-sa Germany License.
-This means, that you can use and adapt the files, as long as you attribute to the copyright holder
-Name: Bernd Krueger
-Source: <a href="http://www.piano-midi.de">http://www.piano-midi.de</a>
-The distribution or public playback of the files is only allowed under identical license conditions.
-    </pre>
   </body>
 </html>

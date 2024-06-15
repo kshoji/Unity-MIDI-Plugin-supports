@@ -1,16 +1,90 @@
-body { padding: 0; margin: 0 }
-#unity-container { position: absolute }
-#unity-container.unity-desktop { left: 50%; top: 50%; transform: translate(-50%, -50%) }
-#unity-container.unity-mobile { width: 100%; height: 100% }
+body { padding: 0; margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+.en {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 92;
+}
+.ja {
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings: "wdth" 92;
+}
+.cn {
+    font-family: "Noto Sans SC", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings: "wdth" 92;
+}
+
+#unity-container.unity-desktop { position: static; width: 960px; height: 650px }
+#unity-container.unity-mobile { position: absolute; width: 100%; height: 100%; top: 250% }
 #unity-canvas { background: #231F20 }
-.unity-mobile #unity-canvas { width: 100%; height: 100% }
-#unity-loading-bar { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none }
+.unity-desktop #unity-canvas { width: 960px; height: 650px }
+.unity-mobile #unity-canvas { position: absolute; width: 100%; height: 100% }
+#unity-loading-bar { display: none }
+.unity-desktop #unity-loading-bar { position: static; transform: translate(403px, -400px) }
+.unity-mobile #unity-loading-bar { position: absolute; width: 100%; left: 50%; top: 50%; transform: translate(-77px, -74px) }
 #unity-logo { width: 154px; height: 130px; background: url('unity-logo-dark.png') no-repeat center }
 #unity-progress-bar-empty { width: 141px; height: 18px; margin-top: 10px; margin-left: 6.5px; background: url('progress-bar-empty-dark.png') no-repeat center }
 #unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-dark.png') no-repeat center }
-#unity-footer { position: relative }
-.unity-mobile #unity-footer { display: none }
-#unity-webgl-logo { float:left; width: 204px; height: 38px; background: url('webgl-logo.png') no-repeat center }
-#unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px }
-#unity-fullscreen-button { float: right; width: 38px; height: 38px; background: url('fullscreen-button.png') no-repeat center }
-#unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
+#unity-footer { height: 50px }
+.unity-desktop #unity-footer { position: static; width: 960px; height: 50px; transform: translate(0px, -163px) }
+.unity-mobile #unity-footer { position: absolute; display: none; top: 100%; transform: translate(0px, 0px) }
+#unity-webgl-logo { float: none; width: 204px; height: 38px; background: url('webgl-logo.png') no-repeat center }
+#unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px; transform: translate(0px, -38px)}
+#unity-fullscreen-button { float: right; width: 38px; height: 38px; background: url('fullscreen-button.png') no-repeat center; transform: translate(0px, -38px) }
+#unity-warning { background: white; padding: 10px; display: none }
+.unity-desktop #unity-warning { position: static; width: 768px; transform: translate(96px, -360px) }
+.unity-mobile #unity-warning { position: absolute; width: 80%; height: 30%; top: 50%; left: 10%; transform: translate(0px, -25%) }
+
+#demo-link { display: none }
+#demo-link.unity-mobile {
+    display: block;
+    background-color: #0080c0;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+.button {
+    display: block;
+    background-color: #0080c0;
+    border: 2px solid #0080c0;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+.blue-button {
+    background-color: #0080c0;
+    color: white;
+}
+.blue-button:hover {
+    background-color: white;
+    color: #0080c0;
+}
+
+.language-tab-bar { width:100%; overflow:hidden; border-bottom: 1px solid; border-color: #ccc }
+.language-tab-bar .language-tab-bar-item { padding: 8px 16px; float: left; width: auto; border: none; display: block; outline: 0 }
+
+.language-tab-dark-grey,.language-tab-hover-dark-grey:hover,.language-tab-dark-gray,.language-tab-hover-dark-gray:hover{color:#fff!important;background-color:#616161!important}
+
+.language-tab-button{transition-duration: 0.2s; height: 3em; border-radius: 8px 8px 0px 0px }
+.language-tab-button:hover{color:#000!important;background-color:#ccc!important}
