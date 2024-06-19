@@ -792,3 +792,7 @@ Project Settings > Other Settings > Script Compilation > Scripting Define Symbol
     - 更新: 改进了 SMF 加载兼容性
     - 修复: SMF 播放在接近开始事件时失败
     - 修复: Android 输入设备初始化失败
+- v1.5.1 修正版本
+    - 修复: Unity 编辑器不适用于 12.3 之前的旧 macOS 版本
+        - 已调整为适用于 macOS 10.13 或更高版本
+    - 修复: 导入示例场景时出现重复的 GUID

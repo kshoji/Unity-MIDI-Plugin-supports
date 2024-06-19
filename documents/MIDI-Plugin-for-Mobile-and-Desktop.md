@@ -792,3 +792,7 @@ The original website below has no `https` services, so the sample code specifies
     - Updated: Improved SMF reading compativility
     - Fixed: SMF playback fails around the first MIDI event
     - Fixed: Android input device initialization issue
+- v1.5.1 Bugfix release
+    - Fixed: Unity Editor doesn't work on older macOS versions prior to 12.3
+        - Adjusted to work with macOS 10.13 and later
+    - Fixed: Duplicate GUIDs when importing sample scenes
