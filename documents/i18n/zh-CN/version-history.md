@@ -1,0 +1,108 @@
+﻿# 版本历史
+- 
+- v1.0 初始版本: 2021/08/07
+- v1.1 更新版本: 2022/04/11
+  - 添加 MIDI 音序器（播放/录制 MIDI 序列）功能
+  - 添加 SMF 读/写功能
+  - 添加 BLE MIDI 外设功能在 Android 上
+  - 修复 USB MIDI 接收问题 在 Android 上
+  - 修复 BLE MIDI 在 Android / iOS 上发送问题 在
+  - 上修复 BLE MIDI 接收问题（NoteOn with velocity = 0）
+- v1.2.0 更新版本: 2022/08/17
+  - 添加对 Android 或其他平台的实验性 RTP-MIDI 支持。
+  - 在通用 Windows 平台 (UWP) 上添加 USB MIDI 支持。
+  - 添加 Android 12 的新蓝牙权限支持。
+  - 修复 iOS、Android 上的 MIDI 收发性能改进。
+  - 修复示例场景多次附加时的 EventSystem 重复错误。
+  - 修复 Android BLE MIDI 关于固定时间戳的问题。
+- v1.2.1 修正版本: 2022/08/29
+  - 修复排序器线程在关闭后仍然存在
+  - 修复 Android ProgramChange 消息失败
+  - 修复 System Exclusive 日志记录问题
+  - 修复 UWP 上的 ThreadInterruptException 问题
+  - 修复围绕 System Exclusive 的 SMF 读/写问题
+  - 一些性能改进
+- v1.3.0 更新版本: 2022/10/13
+  - 添加对 Standalone OSX、Windows、Linux 的平台支持
+  - 添加对 WebGL 的平台支持
+  - 添加对 Unity Editor OSX、Windows、Linux 的支持
+  - 将 Sequencer 实现从 Thread 更改为 Coroutine
+  - 修复 iOS/OSX 设备附加/分离问题
+- v1.3.1 修正版本: 2023/05/18
+  - [Issue connecting to Quest 2 via cable](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/1)
+  - [Sample scene stops working.](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/5)
+  - [Byte is obsolete on android](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/8)
+  - [Any way of negotiating MTU?](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/9)
+  - [Can't get it to work on iOS](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/10)
+  - [Have errors with sample scene](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/11)
+  - Android 权限请求问题
+  - 添加对 Android CompanionDeviceManager 支持
+- v1.3.2 修正版本: 2023/05/19
+  - 修复 Android 上的编译错误
+  - 修复 播放 SMF 时 MIDI 信号的顺序
+- v1.3.3 修正版本: 2023/05/25
+  - 修复 WebGL 上 MIDI 发送失败
+- v1.3.4 修正版本: 2023/06/05
+  - 修复：与之前连接的设备ID相同但设备名称不同的设备时，获取到错误的设备名称。
+  - iOS: 将“完成”按钮添加到 BLE MIDI 搜索弹出框
+  - Sample scene: BLE MIDI 扫描功能仅限 Android/iOS
+  - MidiManager 单例模式细化
+- v1.4.0 更新版本: 2023/12/07
+  - 追加: 对 Android、iOS、macOS 的 Nearby Connections MIDI 支持
+  - 追加: 对 WebGL 的 蓝牙 LE MIDI 支持
+  - 修复: 了在 iOS 设备上连接/断开设备时错误的回调。
+- v1.4.1 更新版本: 2024/02/22
+  - 修复: [Linux平台下链接错误](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/16)
+  - 追加: WebGL 平台添加了对供应商名称和设备名称的支持
+  - 追加: [iOS/MacOS/Linux/Android 上的应用程序间 MIDI 连接（Virtual MIDI）支持](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/18)
+  - 修复: 了示例场景中的内存泄漏
+- v1.4.2 修正版本: 2024/02/27
+  - 修复: WebGL Sample scene初始化失败
+- v1.4.3 修正版本: 2024/03/12
+  - 修复: 如果蓝牙关闭，Android 插件初始化失败
+  - 修复: 在 Android 14 上无法打开 USB MIDI 设备
+  - 修复: Windows 插件无法更新 MIDI 设备
+  - 修复: 退出 MidiManager 时 Linux 插件崩溃
+  - 修复: Unity 编辑器在停止游戏后停止 MIDI 功能
+  - 追加: 获取输入/输出deviceId的能力（与所有deviceId获取方法分开添加）
+  - 追加: 能够指定与 MIDI 音序器的设备连接
+  - 追加: 接收 MIDI 音序器播放结束信号的回调
+  - 追加: 改进了 MIDI 音序器信号计时的准确性
+  - 追加: 现在可以以微秒为单位指定 MIDI 音序器播放位置。
+- v1.4.4 修正版本: 2024/04/09
+  - 修复: Android插件加载失败时初始化中断
+  - 修复: Android蓝牙MIDI无法发送MIDI消息
+  - 追加: Android平台支持ProGuard minify配置
+- v1.4.5 修正版本: 2024/04/13
+  - 修复: Android Bluetooth MIDI 在重负载时无法发送
+  - 更新: 支持使用Android新的蓝牙LE API
+  - 修复: Android 上 CompanionDeviceManager 初始化的问题。 从该版本开始，此功能需要 `ACCESS_FINE_LOCATION` 权限。
+- v1.5.0 修复: 2024/06/05
+  - 追加: MIDI 和弦表达功能（目前处于实验状态）
+  - 完全重构内部实现
+  - 更新: 改进了 SMF 加载兼容性
+  - 修复: SMF 播放在接近开始信号时失败
+  - 修复: Android 输入设备初始化失败
+- v1.5.1 修正版本: 2024/09/05
+  - 修复: Unity 编辑器不适用于 12.3 之前的旧 macOS 版本
+    - 已调整为适用于 macOS 10.13 或更高版本
+  - 修复: 导入示例场景时出现重复的 GUID
+- v2.0.0 更新版本: 2025/05/05
+  - 追加: MIDI 2.0 支持 iOS、macOS 独立版、Android 和独立 Linux
+  - 追加: 网络 MIDI 2.0（UDP MIDI 2.0）功能
+  - 追加: 支持导入/导出 MIDI 2.0 剪辑/容器文件
+    - MIDI 2.0 容器文件格式目前处于草案规范阶段，因此将来可能会发生变化。
+  - 追加: C# 使用信号委托接收 MIDI
+  - 追加: 使用 C# 对象进行 MIDI 接收
+  - 修复: 定义符号 ENABLE_NEARBY_CONNECTIONS 时出现编译错误
+  - 修复: Linux 平台上未收到某些信号（TuneRequest、TimingClock、Start、Stop、Continue、ActiveSensing、Reset）。
+  - 修复: 某些应用程序间 MIDI 设备无法在 Linux 平台上连接。
+  - 修复: [即使停止播放模式后，编辑器中仍然接收 MIDI 消息](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/31)
+- v2.0.1 版本错误修复发布：2025年1月7日
+  - 修复：Android 插件初始化问题
+  - 修复：NullReferenceException 相关问题
+  - 更新：macOS 插件
+  - 修复：部分性能问题
+  - 修复：Android 平台上的 NullPointerException 崩溃问题：[MidiSampleScene crash when the app "抖音" is installed,There was no such thing before the upgrade to Android 15.](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/44)
+  - 新增：Maestro Midi Player Tool Kit 集成
+  - 修复：UnityEditor 中的 UmpSequencer 问题
