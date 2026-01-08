@@ -2,6 +2,11 @@
 
 このドキュメントでは、`Assets/MIDI` の内容、ランタイム API の構造、および Unity で MIDI 1.0、MIDI 2.0 (UMP)、MPE、および関連するトランスポートを使用する方法について説明します。
 
+## NotebookLM
+このマニュアルを登録したAIを作成してみました。
+不明点があれば、まずはこちらに問い合わせてみましょう。(Google アカウントが必要です)  
+https://notebooklm.google.com/notebook/10ea85d5-92d8-4225-bd8b-b24e4e1bf747
+
 ## 言語
 - [English](../../index.md)
 - [中文(简体)](../zh-CN/index.md)

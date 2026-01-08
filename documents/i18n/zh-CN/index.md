@@ -2,6 +2,11 @@
 
 本中心文档介绍了 `Assets/MIDI` 目录的内容、运行时 API 的结构，以及如何在 Unity 中使用 MIDI 1.0、MIDI 2.0 (UMP)、MPE 和相关传输协议。
 
+## NotebookLM
+我们开发了一款人工智能程序来记录本手册。  
+如有任何疑问，请先在此处联系我们。（需要使用谷歌账号。）  
+https://notebooklm.google.com/notebook/12f7cab5-0554-4f42-9f26-71f2f3507b1b
+
 ## 语言
 - [日本語](../ja/index.md)
 - [English](../../index.md)
