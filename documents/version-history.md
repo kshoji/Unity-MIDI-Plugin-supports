@@ -98,7 +98,7 @@
     - Fixed: Some events(TuneRequest, TimingClock, Start, Stop, Continue, ActiveSensing, Reset) are not received on Linux platform.
     - Fixed: Some inter-app MIDI devices not attached on Linux platform.
     - Fixed: [Still receiving MIDI messages in Editor even after stopping Play mode](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/31)
-- v2.0.1 Bugfix release: 7 Jan 2025
+- v2.0.1 Bugfix release: 12 Jan 2025
     - Fixed: Initializing Android plugin
     - Fixed: Some fix around NullReferenceException
     - Updated: macos plugin

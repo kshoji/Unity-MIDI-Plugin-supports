@@ -98,7 +98,7 @@
   - 修正: Linux プラットフォームで一部のイベント (TuneRequest、TimingClock、Start、Stop、Continue、ActiveSensing、Reset) が受信されない。
   - 修正: Linuxプラットフォームで一部のアプリ間MIDIデバイスが接続されない
   - 修正: [再生モードを停止した後でもエディターでMIDIメッセージを受信し続ける](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/31)
-- v2.0.1 バグ修正リリース: 2025年1月7日
+- v2.0.1 バグ修正リリース: 2025年1月12日
   - 修正: Androidプラグインの初期化
   - 修正: NullReferenceException関連の修正
   - 更新: macOSプラグイン

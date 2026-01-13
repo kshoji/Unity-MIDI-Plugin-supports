@@ -98,7 +98,7 @@
   - 修复: Linux 平台上未收到某些信号（TuneRequest、TimingClock、Start、Stop、Continue、ActiveSensing、Reset）。
   - 修复: 某些应用程序间 MIDI 设备无法在 Linux 平台上连接。
   - 修复: [即使停止播放模式后，编辑器中仍然接收 MIDI 消息](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/31)
-- v2.0.1 版本错误修复发布：2025年1月7日
+- v2.0.1 版本错误修复发布：2025年1月12日
   - 修复：Android 插件初始化问题
   - 修复：NullReferenceException 相关问题
   - 更新：macOS 插件
