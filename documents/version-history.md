@@ -1,0 +1,108 @@
+﻿# Version History
+
+- v1.0 Initial release: 7 Aug 2021
+- v1.1 Update release: 11 Apr 2022
+    - Add MIDI sequencer(playing / recording MIDI sequence) feature
+    - Add SMF reading / writing feature
+    - Add BLE MIDI Peripheral feature on Android
+    - Fix USB MIDI receiving issues on Android
+    - Fix BLE MIDI sending issues on Android / iOS
+    - Fix BLE MIDI receiving issue(NoteOn with velocity = 0) on Android
+- v1.2.0 Update release: 17 Aug 2022
+    - Add experimental RTP-MIDI support for Android, or other platforms.
+    - Add USB MIDI support for Universal Windows Platform(UWP).
+    - Add Android 12's new Bluetooth permissions support.
+    - Fix MIDI tranceiving performance improvement on iOS, Android.
+    - Fix EventSystem duplication error when the sample scene appended multiple times.
+    - Fix Android BLE MIDI's issue around fixed timestamp.
+- v1.2.1 Bugfix release: 29 Aug 2022
+    - Fix sequencer thread remains after closing
+    - Fix Android ProgramChange message failure
+    - Fix System exclusive logging issue
+    - Fix ThreadInterruptException issue on UWP
+    - Fix SMF reading/writing issues around System exclusive
+    - Some performance improvements
+- v1.3.0 Update release: 13 Oct 2022
+    - Add platform support for Standalone OSX, Windows, Linux
+    - Add platform support for WebGL
+    - Add support for Unity Editor OSX, Windows, Linux
+    - Changed Sequencer implementation from Thread to Coroutine
+    - Fix iOS/OSX device attaching/detaching issue
+- v1.3.1 Bugfix release: 18 May 2023
+    - [Issue connecting to Quest 2 via cable](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/1)
+    - [Sample scene stops working.](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/5)
+    - [Byte is obsolete on android](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/8)
+    - [Any way of negotiating MTU?](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/9)
+    - [Can't get it to work on iOS](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/10)
+    - [Have errors with sample scene](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/11)
+    - Android permissions requesting issue
+    - Add: Android CompanionDeviceManager support
+- v1.3.2 Bugfix release: 19 May 2023
+    - Fixed Android compile error
+    - Fixed MIDI event order while playing SMF sequence
+- v1.3.3 Bugfix release: 25 May 2023
+    - Fixed WebGL MIDI sending failure
+- v1.3.4 Bugfix release: 5 Jun 2023
+    - Fixed: The wrong device name was acquired when a device with the same device ID as the previously connected device but with a different device name.
+    - iOS: Add 'Done' button to the BLE MIDI searching popover
+    - Sample scene: BLE MIDI Scan feature is Android/iOS only
+    - MidiManager singleton pattern refined
+- v1.4.0 Update release: 7 Dec 2023
+    - Add: Nearby Connections MIDI feature for Android, iOS, macOS
+    - Add: Bluetooth LE MIDI feature for WebGL
+    - Fixed: iOS device attach/detach callback has mismatches
+- v1.4.1 Update release: 22 Feb 2024
+    - Fixed: [The link error at Linux platform](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/16)
+    - Add: Vendor name / device name support for WebGL platform.
+    - Add: [Inter App MIDI connections(virtual MIDI) support for iOS/MacOS/Linux/Android](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/18)
+    - Fixed: Memory leak issue on Sample scene.
+- v1.4.2 Bugfix release: 27 Feb 2024
+    - Fixed: WebGL Sample scene fails to initialize
+- v1.4.3 Bugfix release: 12 Mar 2024
+    - Fixed: Android plugin initialization fails when Bluetooth is off
+    - Fixed: Fails opening USB MIDI devices on Android 14
+    - Fixed: Windows plugin fails updating MIDI devices
+    - Fixed: Linux plugin crashes at terminating MidiManager
+    - Fixed: Unity Editor stops MIDI feature after stopping the game play
+    - Added: Feature to get input/output deviceIds(separated from getting all deviceId set method)
+    - Added: Feature to specify device connections to the MIDI sequencer
+    - Added: The callback to receive MIDI sequencer playback finished event
+    - Added: MIDI sequencer's event timing accuracy improved
+    - Added: MIDI sequencer's playback position can be specified with the microseconds time
+- v1.4.4 Bugfix release: 9 Apr 2024
+    - Fixed: The initialization is interrupted when Android plug-in fails loading.
+    - Fixed: Android Bluetooth MIDI can't send MIDI messages.
+    - Added: The ProGuard minify configuration support for Android platform.
+- v1.4.5 Bugfix release: 13 Apr 2024
+    - Fixed: Android Bluetooth MIDI lose sending MIDI messages under high load.
+    - Updated: Use Android's newer Bluetooth LE APIs.
+    - Fixed: Android CompanionDeviceManager initialization issues. From this version, the feature requests `ACCESS_FINE_LOCATION` permission.
+- v1.5.0 Update release: 5 Jun 2024
+    - Add: MIDI Polyphonic Expression feature (currently, experimental)
+    - Totally refactored internal implements
+    - Updated: Improved SMF reading compativility
+    - Fixed: SMF playback fails around the first MIDI event
+    - Fixed: Android input device initialization issue
+- v1.5.1 Bugfix release: 5 Sept 2024
+    - Fixed: Unity Editor doesn't work on older macOS versions prior to 12.3
+        - Adjusted to work with macOS 10.13 and later
+    - Fixed: Duplicate GUIDs when importing sample scenes
+- v2.0.0 Update release: 5 May 2025
+    - Added: MIDI 2.0 support for iOS, macOS Standalone, Android, Standalone Linux.
+    - Added: Network MIDI 2.0(UDP MIDI 2.0) feature.
+    - Added: MIDI 2.0 Clip / Container file importing / exporting support.
+        - MIDI 2.0 Container file format is currently draft-state specification, so this will change at future.
+    - Added: MIDI receiving by C# event delegates.
+    - Added: MIDI receiving with C# object.
+    - Fixed: Compile error when symbol ENABLE_NEARBY_CONNECTIONS defined.
+    - Fixed: Some events(TuneRequest, TimingClock, Start, Stop, Continue, ActiveSensing, Reset) are not received on Linux platform.
+    - Fixed: Some inter-app MIDI devices not attached on Linux platform.
+    - Fixed: [Still receiving MIDI messages in Editor even after stopping Play mode](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/31)
+- v2.0.1 Bugfix release: 12 Jan 2025
+    - Fixed: Initializing Android plugin
+    - Fixed: Some fix around NullReferenceException
+    - Updated: macos plugin
+    - Fixed: some performance issues
+    - Fixed: NullPointerException crash on Android platform: [MidiSampleScene crash when the app "抖音" is installed,There was no such thing before the upgrade to Android 15.](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/44)
+    - Added: Maestro Midi Player Tool Kit integration
+    - Fixed: UmpSequencer issue on UnityEditor

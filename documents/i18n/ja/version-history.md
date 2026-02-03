@@ -1,0 +1,108 @@
+﻿# 更新履歴
+
+- v1.0 初期リリース: 2021/08/07
+- v1.1 更新リリース: 2022/04/11
+  - 追加: MIDI シーケンサ(MIDIシーケンスの再生・録音)
+  - 追加: SMFの読み取り・書き出し
+  - 追加: AndroidでのBLE MIDI Peripheral機能
+  - 修正: AndroidでのUSB MIDI受信時の問題
+  - 修正: Android・iOSでのBLE MIDI送信時の問題
+  - 修正: AndroidでのBLE MIDI送信(velocity = 0でのNoteOn)の問題
+- v1.2.0 更新リリース: 2022/08/17
+  - 追加: Androidほかプラットフォーム向けの、試験的な RTP-MIDIサポート
+  - 追加: Universal Windows Platform(UWP)向けのUSB MIDIサポート
+  - 追加: Android 12の新しいBluetoothパーミッションのサポート
+  - 修正: iOS, AndroidでのMIDI送受信のパフォーマンス向上
+  - 修正: シーンが複数回追加された際にEventSystemが複数個作成されるエラー
+  - 修正: AndroidのBLE MIDIでのタイムスタンプの問題
+- v1.2.1 バグ修正: 2022/08/29
+  - 修正: シーケンサーのスレッドが閉じたあとも残る問題
+  - 修正: AndroidでのProgramChangeメッセージの受信が失敗する
+  - 修正: サンプルシーンでのSystem exclusiveのログが正しく表示されない
+  - 修正: UWPでThreadInterruptExceptionが発生する
+  - 修正: SMFでSystem exclusiveを読み書きすると起きる問題
+  - 修正: いくつかのパフォーマンス改善
+- v1.3.0 更新リリース: 2022/10/13
+  - 追加: Standalone OSX, Windows, Linuxプラットフォーム対応
+  - 追加: WebGLプラットフォーム対応
+  - 追加: Unity Editor OSX, Windows, Linux対応
+  - 変更: シーケンサーの実装を Thread から Coroutine に
+  - 修正: iOS/OSX でのデバイス接続・切断時の問題
+- v1.3.1 バグ修正: 2023/05/18
+  - [Issue connecting to Quest 2 via cable](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/1)
+  - [Sample scene stops working.](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/5)
+  - [Byte is obsolete on android](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/8)
+  - [Any way of negotiating MTU?](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/9)
+  - [Can't get it to work on iOS](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/10)
+  - [Have errors with sample scene](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/11)
+  - Androidのパーミッション要求についての問題を解消
+  - AndroidのCompanionDeviceManager経由での接続をサポート
+- v1.3.2 バグ修正: 2023/05/19
+  - Androidのコンパイルエラーを修正
+  - SMF再生時のMIDIイベントの順序が正しくなるよう修正
+- v1.3.3 バグ修正: 2023/05/25
+  - WebGLのMIDI送信失敗を修正
+- v1.3.4 バグ修正: 2023/06/05
+  - 過去に接続していたデバイスIDと同じで、デバイス名が違うものが接続されたときに、間違ったデバイス名を取得する不具合を修正
+  - iOS: BLE MIDIデバイス検索のポップアップに「完了」ボタンを追加
+  - サンプルシーン: BLE MIDIデバイスの検索は Android/iOS のみ使えるよう調整
+  - MidiManager のシングルトンの設計を調整
+- v1.4.0 更新リリース: 2023/12/07
+  - 追加: Android, iOS, macOS向けの Nearby Connections MIDI サポート
+  - 追加: WebGL向けの Bluetooth LE MIDI サポート
+  - 修正: iOSデバイスでの デバイス接続/切断時のコールバックが間違っていたのを修正
+- v1.4.1 更新リリース: 2024/02/22
+  - 修正: [Linuxプラットフォームでのリンクエラーを修正](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/16)
+  - 追加: WebGLプラットフォームでベンダ名/デバイス名をサポート
+  - 追加: [iOS/MacOS/Linux/Android プラットフォームでアプリ間MIDI接続(仮想MIDI)をサポート](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/18)
+  - 修正: サンプルシーンのメモリリークを修正
+- v1.4.2 バグ修正: 2024/02/27
+  - 修正: WebGLのサンプルシーンの初期化が失敗する
+- v1.4.3 バグ修正: 2024/03/12
+  - 修正: Bluetooth がオフの場合、Android プラグインの初期化が失敗する
+  - 修正: Android 14 で USB MIDI デバイスを開けない
+  - 修正: Windows プラグインがMIDIデバイスの更新に失敗する
+  - 修正: Linux プラグインが MidiManager の終了時にクラッシュする
+  - 修正: ゲームプレイを停止した後、Unity エディターが MIDI 機能を停止する
+  - 追加: 入出力の deviceId を取得する機能 (全 deviceId の取得メソッドとは別に追加)
+  - 追加: MIDI シーケンサーへのデバイス接続を指定する機能
+  - 追加: MIDI シーケンサーの再生終了イベントを受信するコールバック
+  - 追加: MIDI シーケンサーのイベント タイミングの精度を向上
+  - 追加: MIDI シーケンサーの再生位置をマイクロ秒時間で指定できるように
+- v1.4.4 バグ修正: 2024/04/09
+  - 修正: Androidプラグインのロードが失敗した時に初期化が中断される
+  - 修正: AndroidのBluetooth MIDIがMIDIメッセージを送信できない
+  - 追加: AndroidプラットフォームでProGuard minify設定のサポート
+- v1.4.5 バグ修正: 2024/04/13
+  - 修正: AndroidのBluetooth MIDIが高負荷のときに送信に失敗する
+  - 更新: Androidの新しいBluetooth LEのAPIを使うよう対応
+  - 修正: AndroidのCompanionDeviceManager初期化に関する問題を修正。本バージョンから、この機能には `ACCESS_FINE_LOCATION` パーミッションが必要になります。
+- v1.5.0 更新リリース: 2024/06/05
+  - 追加: MIDI Polyphonic Expression機能(現在は実験的な状態での提供です)
+  - 内部実装を全面的にリファクタリング
+  - 更新: SMF読み込みの互換性を向上
+  - 修正: SMFの再生が冒頭のイベント付近で失敗する
+  - 修正: Androidの入力デバイスの初期化に失敗する
+- v1.5.1 バグ修正: 2024/09/05
+  - 修正 12.3より前の古いmacOSバージョンでUnityエディタが動かない
+    - macOS 10.13以降で動作するよう調整
+  - 修正 サンプルシーンのインポート時にGUIDが重複している
+- v2.0.0 更新リリース: 2025/05/05
+  - 追加: iOS、macOS スタンドアロン、Android、スタンドアロン Linux 向けの MIDI 2.0 サポート
+  - 追加: ネットワークMIDI 2.0(UDP MIDI 2.0)機能
+  - 追加: MIDI 2.0 クリップ/コンテナファイルのインポート/エクスポートのサポート
+    - MIDI 2.0 コンテナ ファイル形式は現在ドラフト状態の仕様であるため、将来変更される予定です。
+  - 追加: C# イベント デリゲートによる MIDI 受信
+  - 追加: C#オブジェクトによるMIDI受信
+  - 修正: シンボル ENABLE_NEARBY_CONNECTIONS が定義されている場合の、コンパイルエラー
+  - 修正: Linux プラットフォームで一部のイベント (TuneRequest、TimingClock、Start、Stop、Continue、ActiveSensing、Reset) が受信されない。
+  - 修正: Linuxプラットフォームで一部のアプリ間MIDIデバイスが接続されない
+  - 修正: [再生モードを停止した後でもエディターでMIDIメッセージを受信し続ける](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/31)
+- v2.0.1 バグ修正リリース: 2025年1月12日
+  - 修正: Androidプラグインの初期化
+  - 修正: NullReferenceException関連の修正
+  - 更新: macOSプラグイン
+  - 修正: パフォーマンスの問題
+  - 修正: AndroidプラットフォームでのNullPointerExceptionによるクラッシュ: [MidiSampleScene crash when the app "抖音" is installed,There was no such thing before the upgrade to Android 15.](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/44)
+  - 追加: Maestro MIDI Player Tool Kitの統合
+  - 修正: UnityEditorでのUmpSequencerの問題
