@@ -5,6 +5,9 @@ Documents and issues for Unity MIDI Plugin
 Unity MIDI Plugin is available on the Asset Store.  
 https://u3d.as/2CTe
 
+On Unity China Asset Store is also available.  
+https://assetstore.u3d.cn/packages/slug/20002327
+
 ## Plugin demo
 Latest sample scene's WebGL build  
 https://kshoji.github.io/Unity-MIDI-Plugin-supports/
