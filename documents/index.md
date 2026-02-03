@@ -3,8 +3,8 @@
 This documentation describes the contents of `Assets/MIDI`, how the runtime API is structured, and how to use MIDI 1.0, MIDI 2.0 (UMP), MPE, and related transports in Unity.
 
 ## NotebookLM
-We have created an AI that registers this manual.  
-If you have any questions, please contact us here first. (A Google account is required.)  
+I've created an AI chat that registers this manual.  
+If you have any questions, please use this tool first. (A Google account is required.)  
 https://notebooklm.google.com/notebook/c98f2512-35e0-4396-9a9d-686f662b6f4a
 
 ## Languages
