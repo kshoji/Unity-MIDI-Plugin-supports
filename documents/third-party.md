@@ -20,13 +20,23 @@ Unity integration is provided by:
 
 <div class="page" />
 
-## UDP MIDI 2.0 discovery dependencies (vendored sources)
+## mDNS / DNS-SD vendor dependencies (shared)
 
 Location:
-- `Assets/MIDI/Scripts/UdpMidi2Discovery/`
+- `Assets/MIDI/Scripts/MdnsVendor/` (`jp.kshoji.mdns.vendor`)
 
-These sources support discovery workflows (mDNS/DNS and helpers).
+Shared by Network MIDI 2.0 UDP discovery and RTP-MIDI Zeroconf.
 If you modify or redistribute the package, ensure you comply with each component’s license.
 
 See also:
 - [Contacts / Support](contacts.md) (lists discovery dependencies and versions)
+
+<div class="page" />
+
+## VST3 Plugin Host (not bundled)
+
+This MIDI package does **not** redistribute the VST3 SDK, `VstHostNative.dll`, VST host C#, or third-party `.vst3` plugins.
+
+VST® is a registered trademark of Steinberg Media Technologies GmbH.
+
+For VST3 hosting in Unity, use the separate package [Unity-VST3-Bridge](https://github.com/kshoji/Unity-VST3-Bridge) (`jp.kshoji.unity.vst3nativehost`) and its `NOTICE.md` / documentation. Short integration pointer: [Integrations — VST3 Plugin Host](integrations.md#vst3-plugin-host-separate-package).

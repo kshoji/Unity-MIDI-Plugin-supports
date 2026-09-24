@@ -133,12 +133,13 @@ if (sequence.GetTickLength() > 0)
 ## 実用的なガイダンス
 
 - 単純に「MIDI ファイルを読み込んでメッセージを送信する」場合は、通常以下の手順を踏みます:
-  1. SMF を `Sequence` に読み込む。
+  1. SMF を `Sequence` に読み込む（[SMF プレビュー](editor-tools.md) または `StandardMidiFileReader`）。
   2. ティックごとにイベントを反復処理する（またはシーケンサーを使用する）。
   3. `MidiManager` (MIDI 1.0) を介して送信、または UMP に変換して `Midi2Manager` (MIDI 2.0) を介して送信。
 
 - 精密なタイミングやトランスポート制御（再生/停止/ループ）が必要な場合は、以下を検討してください:
   - `SequencerImpl` (SMF 形式のシーケンシング)。
+  - [SmfPlayer](smf-tools.md) — Unity コンポーネントとして `SequencerImpl` をラップした高レベル API。
   - UMP 中心の開発であれば、MIDI 2.0 UMP クリップシーケンサーのワークフロー（[MIDI 2.0 / UMP](midi2.md) を参照）。
 
 <div class="page" />

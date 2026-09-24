@@ -20,7 +20,7 @@
 - Unity MIDI Plugin OSX: [https://github.com/kshoji/Unity-MIDI-Plugin-OSX](https://github.com/kshoji/Unity-MIDI-Plugin-OSX)
 
 ## 他の作者による使用中のオープンソースソフトウェア (OSS) パッケージ:
-- Network MIDI 2.0 (UDP MIDI 2.0) 検索機能
+- Network MIDI 2.0 / RTP-MIDI ディスカバリ（共有: `Assets/MIDI/Scripts/MdnsVendor/`）
   - [net-mdns](https://github.com/richardschneider/net-mdns) 0.27.0
   - [net-dns](https://github.com/richardschneider/net-dns) 2.0.1
   - [SimpleBase](https://github.com/ssg/SimpleBase) 2.1.0 (古いバージョンの Unity でコンパイルできるように修正済み)

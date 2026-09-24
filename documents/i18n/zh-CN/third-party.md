@@ -20,13 +20,23 @@ Unity 集成由以下文件提供：
 
 <div class="page" />
 
-## UDP MIDI 2.0 发现依赖项 (第三方源代码)
+## mDNS / DNS-SD 第三方依赖（共享）
 
 位置：
-- `Assets/MIDI/Scripts/UdpMidi2Discovery/`
+- `Assets/MIDI/Scripts/MdnsVendor/`（`jp.kshoji.mdns.vendor`）
 
-这些源代码支持发现工作流（mDNS/DNS 及助手工具）。
+由 Network MIDI 2.0 UDP 发现与 RTP-MIDI Zeroconf 共用。
 如果您修改或重新分发该包，请确保遵守每个组件的许可证要求。
 
 另请参阅：
 - [联系与支持](contacts.md)（列出了发现依赖项及其版本）
+
+<div class="page" />
+
+## VST3 插件宿主（不同捆）
+
+本 MIDI 软件包 **不重新分发** VST3 SDK、`VstHostNative.dll`、VST 宿主 C# 或第三方 `.vst3` 插件。
+
+VST® 是 Steinberg Media Technologies GmbH 的注册商标。
+
+若要在 Unity 中托管 VST3，请使用独立软件包 [Unity-VST3-Bridge](https://github.com/kshoji/Unity-VST3-Bridge)（`jp.kshoji.unity.vst3nativehost`）及其 `NOTICE.md`／文档。简短说明：[集成 — VST3 插件宿主](integrations.md#vst3-插件宿主独立软件包)。

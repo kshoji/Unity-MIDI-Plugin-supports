@@ -115,3 +115,15 @@
     - Fixed: `PostProcessBuild` now selects `BleMidiUnityGamePlayerActivity` when Application Entry Point includes GameActivity (`FEATURE_ANDROID_COMPANION_DEVICE`)
     - Updated: Android BLE MIDI plugin (`ble-midi-0.0.21.aar`)
     - Updated: Android Inter-App MIDI plugin (`inter-app-midi-0.0.6.aar`, `minCompileSdk` 34)
+- v2.1.0 Update release: 26 Jun 2026
+    - Added (**Core & utilities**): Note-name conversion and Fluent MIDI 1.0 send API; scale utilities and shared editor keyboard layout; project-wide MIDI settings; all message-type event handling across gameplay and integrations
+    - Added (**Editor tools**): Real-time MIDI Monitor and Virtual Controller for Play-mode debugging; SMF preview / import; MIDI Project Settings; Timeline marker generation from sequence assets; batch compile builder for CI scripting-define matrix
+    - Added (**Gameplay & SMF**): Inspector-driven MIDI → UnityEvent mapping; per-channel note tracking and channel / device filters; CC smoothing and button detection; game-time SMF playback and live recording; tempo / time-signature extraction; SMF ScriptableObject assets
+    - Added (**Clock, chord & scale**): External MIDI Clock sync and master Clock output; SMF playback synchronized to external Clock; chord-name detection, scale membership, and practice / quiz helpers
+    - Added (**Unity integrations**): MIDI-driven Animator parameters and Blend Trees; Timeline playback / record tracks, markers, and signals; Visual Scripting nodes for MIDI events, send, and playback
+    - Added (**Networking**): LAN UDP MIDI sync (broadcast, merge, playback position); session discovery and latency compensation; optional Mirror / Netcode / WSNet2 multiplayer bridges
+    - Added (**Optional integrations**): Bidirectional Input System bridge with synthetic MIDI device; DSP-scheduled audio via Scriptable Audio Pipeline; Chunity (ChucK) MIDI bridge; extended Maestro / MPTK integration (event pipeline, playback, spatializer, and more)
+    - Added (**Foundation**): Shared latency calibration, device selection, settings persistence, output routing presets, and UI Toolkit HUD
+    - Added (**Samples & docs**): Reorganized samples with menu launcher; sample scenes for each integration and network mode; expanded kits / integrations / build-postprocessing / samples documentation
+    - Fixed: MIDI Monitor and Virtual MIDI Controller stability; sample scene GUIDs and wiring; Unity 2021 compile compatibility
+    - Fixed: Reset mutable static state for Unity Fast Enter Play Mode (domain reload disabled), including MidiManager / MpeManager singletons and related plugin / sample / editor statics

@@ -127,12 +127,13 @@ Use this if you need to:
 ## Practical guidance
 
 - For simple “play a MIDI file by sending messages out”, you typically:
-  1. Read SMF into a `Sequence`
+  1. Read SMF into a `Sequence` ([SMF Preview](editor-tools.md) or `StandardMidiFileReader`)
   2. Iterate events by tick (or use a sequencer)
   3. Send via `MidiManager` (MIDI 1.0) or convert to UMP and send via `Midi2Manager` (MIDI 2.0)
 
 - If you need precise timing and transport controls (play/stop/loop), consider using:
   - `SequencerImpl` (SMF-style sequencing), or
+  - [SmfPlayer](smf-tools.md) — a high-level API that wraps `SequencerImpl` as a Unity component.
   - the MIDI 2.0 UMP clip sequencer workflow if your target is UMP-centric (see [MIDI 2.0 / UMP](midi2.md)).
 
 <div class="page" />

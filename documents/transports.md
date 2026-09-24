@@ -103,7 +103,7 @@ Threading:
 UDP MIDI 2.0 support is provided by:
 
 - `Assets/MIDI/Scripts/Midi2Plugin.Udp.cs`
-- Discovery helpers/dependencies: `Assets/MIDI/Scripts/UdpMidi2Discovery/`
+- Discovery helpers/dependencies: `Assets/MIDI/Scripts/MdnsVendor/` (`jp.kshoji.mdns.vendor`)
 
 Capabilities exposed (through `Midi2Manager`):
 - Run UDP MIDI 2.0 servers.

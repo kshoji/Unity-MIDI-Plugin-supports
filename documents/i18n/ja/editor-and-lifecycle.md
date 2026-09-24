@@ -42,3 +42,27 @@
 
 シーン内に既に Unity の `EventSystem` が存在する場合、重複して作成しないようにしてください。
 重複の警告やエラーが出る場合は、適宜初期化処理を調整してください（[スタートガイド](getting-started.md) を参照）。
+
+<div class="page" />
+
+## MIDI モニター (エディタツール)
+
+Unity エディタには、Play モード中の MIDI 入出力をリアルタイム表示する **MIDI モニター** が含まれています。
+
+```
+Window > MIDI > Monitor
+```
+
+### 動作
+
+- Play モード開始時に `[MIDI Monitor Proxy]` が自動生成され、`MidiManager` にイベントハンドラとして登録されます。
+- Play モード終了時に Proxy は自動破棄されます。
+- 出力メッセージは `MidiManager` のエディタ専用フック（`#if UNITY_EDITOR`）経由で捕捉されます。
+
+### 注意点
+
+- モニターは Play モード専用です。Edit モードではメッセージは表示されません。
+- Proxy の生成は `MidiManager.InitializeMidi()` とは独立しています。MIDI 初期化前でも Proxy は登録されますが、メッセージを受信するには通常どおり `InitializeMidi()` が必要です。
+- ログバッファは Play 終了後もウィンドウ上に残ります。次回 Play 時に **Clear** で消去できます。
+
+詳細は [エディタツール (MIDI モニター)](editor-tools.md) を参照してください。

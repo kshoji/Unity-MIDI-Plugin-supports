@@ -59,7 +59,20 @@ Implementations include:
 - `Midi2Plugin.Android.cs`
 - `Midi2Plugin.Apple.cs`
 - `Midi2Plugin.Linux.cs`
+- `Midi2Plugin.Uwp.cs` (`UwpMidi2Plugin` — UWP player only; Method B / Windows MIDI Services winmd)
+- `Midi2Plugin.Windows.cs` (`WindowsMidi2Plugin` — Standalone / Editor Windows; Method C / `Midi2Native.dll`)
 - `Midi2Plugin.Udp.cs` (network transport)
+
+Notes for UWP (`UwpMidi2Plugin`):
+- **UWP player builds only** (not compiled / not runnable in the Unity Editor or Standalone Windows).
+- Requires Windows 11 24H2+ (26100+), Windows MIDI Services enabled, and the SDK Runtime installed. See the UWP section in [Platforms & Limitations](platforms.md).
+- Sample scene: `Assets/MIDI/Samples/Scenes/Midi2SampleScene.unity` (already calls `InitializeMidi2`).
+
+Notes for Standalone / Editor Windows (`WindowsMidi2Plugin`):
+- **Standalone Windows and Unity Editor Windows** (`UNITY_EDITOR_WIN || (UNITY_STANDALONE_WIN && !UNITY_EDITOR)`). UWP remains Method B (`UwpMidi2Plugin`); do not share backends.
+- Requires the same OS / SDK Runtime as UWP MIDI 2.0, plus the native plugin `Midi2Native.dll` under `Assets/MIDI/Plugins/Windows/`. See the Windows section in [Platforms & Limitations](platforms.md).
+- MIDI 1.0 WinMM (`WindowsMidiPlugin`) may enumerate the same hardware in parallel — treat as expected dual enumeration.
+- Sample scene: `Assets/MIDI/Samples/Scenes/Midi2SampleScene.unity` (already calls `InitializeMidi2`).
 
 <div class="page" />
 
@@ -248,6 +261,18 @@ See also:
 - MIDI 2.0 Clip file support exists, but Clip files are still not widespread.
 - MIDI 2.0 Container file support exists, but the Container specification is draft-state and may change.
   - Consider the Container workflow experimental.
+
+### Choosing between this and Scriptable Audio (DSP-synced playback)
+
+The `MidiDspUmpSequenceScheduler` in [Scriptable Audio integration](integrations.md#ump-sequence-playback-dsp-sync) is a separate layer that plays UMP clips on the Unity DSP clock with near-sample-accurate timing. `UmpSequencer` is wall-clock + dedicated-thread driven and is intended for clip editing, recording, and test playback. In a single scene, choose **one or the other**.
+
+| Use case | Recommended |
+|------|------|
+| Clip editing / recording / `.midi2` test playback | `UmpSequencer` |
+| In-game BGM / loops / Seek / DSP-synced audio | `MidiDspUmpSequenceScheduler` |
+| Hardware MIDI 2.0 output (frame granularity acceptable) | Via `MidiManager.SendMidi2RawUmp`. If you need DSP-accurate built-in audio, use `MidiDspUmpSequenceScheduler` + `MidiDspUmpMidi2OutBridge` |
+
+To keep `.midi2` as a Unity asset, you can use `UmpSequenceAsset` ([SMF Tools](smf-tools.md#umpsequenceasset)). For details, limitations, and manual verification steps for DSP-synced playback, see [Unity Ecosystem Integration — UMP sequence](integrations.md#ump-sequence-playback-dsp-sync).
 
 <div class="page" />
 

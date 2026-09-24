@@ -132,12 +132,13 @@ if (sequence.GetTickLength() > 0)
 ## 实践指南
 
 - 对于简单的“通过发送消息来播放 MIDI 文件”，通常步骤如下：
-  1. 将 SMF 读取到 `Sequence` 中。
+  1. 将 SMF 读取到 `Sequence` 中（[SMF 预览](editor-tools.md) 或 `StandardMidiFileReader`）。
   2. 按 Tick 遍历事件（或使用序列化器）。
   3. 通过 `MidiManager` 发送 (MIDI 1.0) 或转换为 UMP 后通过 `Midi2Manager` 发送 (MIDI 2.0)。
 
 - 如果您需要精确的时间控制和传输控制（播放/停止/循环），请考虑使用：
   - `SequencerImpl` (针对 SMF 风格的序列化)，或者
+  - [SmfPlayer](smf-tools.md) — 将 `SequencerImpl` 封装为 Unity 组件的高级 API。
   - 如果您的目标是以 UMP 为中心的，请使用 MIDI 2.0 UMP 剪辑序列化工作流（参见 [MIDI 2.0 / UMP](midi2.md)）。
 
 <div class="page" />

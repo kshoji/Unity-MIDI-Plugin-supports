@@ -1,4 +1,4 @@
-﻿# MIDI 1.0 Runtime (MidiManager)
+# MIDI 1.0 Runtime (MidiManager)
 
 This page documents the MIDI 1.0 runtime API centered around `jp.kshoji.unity.midi.MidiManager` and the `IMidiPlugin` backend interface.
 
@@ -218,6 +218,21 @@ Notes:
 - SysEx: `SendMidiSystemExclusive`
 - System messages: clock, start/continue/stop, reset, etc.
 
+### Fluent API (MidiSend)
+
+A chainable send API is also available (`jp.kshoji.unity.midi.util`):
+
+```csharp
+using jp.kshoji.unity.midi.util;
+
+MidiSend.To(deviceId).Channel(0).NoteOn(60, 127);
+MidiSend.ToFirstOutput().Channel(0).ControlChange(1, 64);
+```
+
+See [Utilities (MidiNoteUtility / MidiMessageBuilder)](utilities.md) for details.
+
+On the Unity Editor, sends from `SendMidi*` and `MidiSend` appear as OUT in the [MIDI Monitor](editor-tools.md).
+
 ### Parameter ranges (common)
 
 - `group`: 0–15 (often ignored for MIDI 1.0 backends, but included for API consistency)
@@ -254,3 +269,5 @@ It will:
 - log device attach/detach
 - log incoming Note On
 - optionally send a test note to the first output device
+
+To wire MIDI input to game events from the Inspector, see `MidiInputRouter` in [Gameplay Components](gameplay.md).

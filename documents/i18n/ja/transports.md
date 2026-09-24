@@ -104,7 +104,7 @@ RTP-MIDI (Apple Network MIDI 形式) は、純粋な .NET 実装を介してサ�
 UDP MIDI 2.0 サポートは以下によって提供されます:
 
 - `Assets/MIDI/Scripts/Midi2Plugin.Udp.cs`
-- 検索用ヘルパー/依存関係: `Assets/MIDI/Scripts/UdpMidi2Discovery/`
+- 検索用ヘルパー/依存関係: `Assets/MIDI/Scripts/MdnsVendor/`（`jp.kshoji.mdns.vendor`）
 
 (`Midi2Manager` を介して公開される) 機能:
 - UDP MIDI 2.0 サーバーの実行。

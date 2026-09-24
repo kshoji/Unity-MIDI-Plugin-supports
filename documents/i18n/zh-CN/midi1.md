@@ -1,4 +1,4 @@
-﻿# MIDI 1.0 运行时 (MidiManager)
+# MIDI 1.0 运行时 (MidiManager)
 
 本页面介绍了围绕 `jp.kshoji.unity.midi.MidiManager` 和 `IMidiPlugin` 后端接口构建的 MIDI 1.0 运行时 API。
 
@@ -227,6 +227,21 @@ API 表面：
 - 系统排他消息 (SysEx): `SendMidiSystemExclusive`
 - 系统消息：时钟、启动/继续/停止、重置等。
 
+### Fluent API (MidiSend)
+
+同样提供可链式调用的发送 API（`jp.kshoji.unity.midi.util`）：
+
+```csharp
+using jp.kshoji.unity.midi.util;
+
+MidiSend.To(deviceId).Channel(0).NoteOn(60, 127);
+MidiSend.ToFirstOutput().Channel(0).ControlChange(1, 64);
+```
+
+详情请参阅 [实用工具 (MidiNoteUtility / MidiMessageBuilder)](utilities.md)。
+
+在 Unity 编辑器中，通过 `SendMidi*` 和 `MidiSend` 发送的消息会在 [MIDI 监视器](editor-tools.md) 中显示为 OUT。
+
 ### 参数范围
 
 - `group`: 0–15 (MIDI 1.0 驱动通常会忽略此参数，但在 MIDI 2.0 传输中有效)
@@ -263,3 +278,5 @@ API 表面：
 - 记录设备连接/断开日志
 - 记录传入的 Note On 消息
 - （可选）向第一个输出设备发送测试音符
+
+如果要通过 Inspector 将 MIDI 输入连接到游戏事件，请参阅 [游戏玩法组件](gameplay.md) 中的 `MidiInputRouter`。

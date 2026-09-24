@@ -115,3 +115,15 @@
   - 修复：启用 `FEATURE_ANDROID_COMPANION_DEVICE` 时，若 Application Entry Point 包含 GameActivity，`PostProcessBuild` 会选择 `BleMidiUnityGamePlayerActivity`
   - 更新：Android BLE MIDI 插件（`ble-midi-0.0.21.aar`）
   - 更新：Android 应用间 MIDI 插件（`inter-app-midi-0.0.6.aar`，`minCompileSdk` 34）
+- v2.1.0 更新版本：2026年6月26日
+  - 新增（**核心与实用工具**）：音符编号与音名相互转换、Fluent API 发送 MIDI 1.0、音阶判定实用工具、编辑器键盘共享布局；项目级 MIDI 设置；游戏玩法与集成全面支持所有消息类型事件
+  - 新增（**编辑器工具**）：播放模式下的实时 MIDI 监视器与虚拟 MIDI 控制器；SMF 预览 / 导入；MIDI 项目设置；从序列资源自动生成 Timeline 标记；用于 CI 的脚本定义矩阵批量编译
+  - 新增（**游戏玩法与 SMF**）：在 Inspector 中将 MIDI 映射到 UnityEvent；按通道追踪已按音符及通道 / 设备过滤；CC 平滑与按钮检测；游戏时间同步的 SMF 播放与实时录制；速度 / 拍号提取；SMF 的 ScriptableObject 化
+  - 新增（**Clock、和弦与音阶**）：外部 MIDI Clock 同步与主 Clock 输出；跟随外部 Clock 的 SMF 播放；和弦名称判定、音阶归属判定、练习与测验辅助
+  - 新增（**Unity 集成**）：MIDI 驱动 Animator 参数与 Blend Tree；Timeline 播放 / 录制轨道、标记与信号；Visual Scripting 的 MIDI 事件 / 发送 / 播放节点
+  - 新增（**网络**）：局域网 UDP MIDI 同步（广播、合并、播放位置）；会话发现与延迟补偿；可选的 Mirror / Netcode / WSNet2 多人联机桥接
+  - 新增（**可选集成**）：通过合成 MIDI 设备的 Input System 双向桥接；通过 Scriptable Audio Pipeline 的 DSP 调度播放；Chunity（ChucK）MIDI 桥接；扩展 Maestro / MPTK 集成（事件管道、播放、空间化等）
+  - 新增（**Foundation**）：共享延迟校准、设备选择、设置持久化、输出路由预设与 UI Toolkit HUD
+  - 新增（**示例与文档**）：带菜单启动器的示例重组；各集成与网络模式的示例场景；扩充 kits / integrations / build-postprocessing / samples 文档
+  - 修复：MIDI 监视器与虚拟 MIDI 控制器稳定性；示例场景 GUID 与接线；Unity 2021 编译兼容性
+  - 修复：针对 Unity Fast Enter Play Mode（禁用 Domain Reload），重置包括 MidiManager / MpeManager 单例在内的可变 static 状态

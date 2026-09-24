@@ -1,4 +1,4 @@
-﻿# MIDI 1.0 ランタイム (MidiManager)
+# MIDI 1.0 ランタイム (MidiManager)
 
 このページでは、`jp.kshoji.unity.midi.MidiManager` と `IMidiPlugin` バックエンドインターフェースを中心とした MIDI 1.0 ランタイム API について説明します。
 
@@ -223,6 +223,21 @@ API:
 - SysEx: `SendMidiSystemExclusive`
 - システムメッセージ: クロック, 開始/継続/停止, リセットなど
 
+### Fluent API (MidiSend)
+
+チェーン可能な送信 API も利用できます（`jp.kshoji.unity.midi.util`）:
+
+```csharp
+using jp.kshoji.unity.midi.util;
+
+MidiSend.To(deviceId).Channel(0).NoteOn(60, 127);
+MidiSend.ToFirstOutput().Channel(0).ControlChange(1, 64);
+```
+
+詳細は [ユーティリティ (MidiNoteUtility / MidiMessageBuilder)](utilities.md) を参照してください。
+
+Unity エディタ上では、`SendMidi*` および `MidiSend` からの送信は [MIDI モニター](editor-tools.md) に OUT として表示されます。
+
 ### パラメータの範囲 (一般的)
 
 - `group`: 0–15 (MIDI 1.0 バックエンドでは無視されることが多いですが、API の一貫性のために含まれています)
@@ -259,3 +274,5 @@ RTP-MIDI プラグインが使用されている場合、`MidiManager` は以下
 - デバイスの接続/切断をログ出力
 - 受信した Note On をログ出力
 - (オプション) 最初の出力デバイスにテストノートを送信
+
+Inspector から MIDI 入力をゲームイベントへ結び付ける場合は、[ゲームプレイ向けコンポーネント](gameplay.md) の `MidiInputRouter` を参照してください。
