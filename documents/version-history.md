@@ -98,7 +98,7 @@
     - Fixed: Some events(TuneRequest, TimingClock, Start, Stop, Continue, ActiveSensing, Reset) are not received on Linux platform.
     - Fixed: Some inter-app MIDI devices not attached on Linux platform.
     - Fixed: [Still receiving MIDI messages in Editor even after stopping Play mode](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/31)
-- v2.0.1 Bugfix release: 12 Jan 2025
+- v2.0.1 Bugfix release: 12 Jan 2026
     - Fixed: Initializing Android plugin
     - Fixed: Some fix around NullReferenceException
     - Updated: macos plugin
@@ -106,3 +106,7 @@
     - Fixed: NullPointerException crash on Android platform: [MidiSampleScene crash when the app "抖音" is installed,There was no such thing before the upgrade to Android 15.](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/44)
     - Added: Maestro Midi Player Tool Kit integration
     - Fixed: UmpSequencer issue on UnityEditor
+- v2.0.2 Bugfix release: 10 Feb 2026
+    - Fixed: MidiManager initialize not completed with Android, Nearby, or RTP-MIDI.
+    - Fixed: DocumentationExamples implementation issues
+    - Fixed: MPE setup method doesn't initialize the system

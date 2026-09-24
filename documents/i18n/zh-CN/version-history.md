@@ -98,7 +98,7 @@
   - 修复: Linux 平台上未收到某些信号（TuneRequest、TimingClock、Start、Stop、Continue、ActiveSensing、Reset）。
   - 修复: 某些应用程序间 MIDI 设备无法在 Linux 平台上连接。
   - 修复: [即使停止播放模式后，编辑器中仍然接收 MIDI 消息](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/31)
-- v2.0.1 版本错误修复发布：2025年1月12日
+- v2.0.1 版本错误修复发布：2026年1月12日
   - 修复：Android 插件初始化问题
   - 修复：NullReferenceException 相关问题
   - 更新：macOS 插件
@@ -106,3 +106,7 @@
   - 修复：Android 平台上的 NullPointerException 崩溃问题：[MidiSampleScene crash when the app "抖音" is installed,There was no such thing before the upgrade to Android 15.](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/44)
   - 新增：Maestro Midi Player Tool Kit 集成
   - 修复：UnityEditor 中的 UmpSequencer 问题
+- v2.0.2 版本错误修复发布：2026年2月10日
+  - 修复：Android、Nearby 或 RTP-MIDI 平台上 MidiManager 初始化无法完成的问题
+  - 修复：DocumentationExamples 实现中的一个问题
+  - 修复：MPE 设置方法中系统无法初始化的问题

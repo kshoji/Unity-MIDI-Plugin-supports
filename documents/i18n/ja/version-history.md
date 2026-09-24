@@ -98,7 +98,7 @@
   - 修正: Linux プラットフォームで一部のイベント (TuneRequest、TimingClock、Start、Stop、Continue、ActiveSensing、Reset) が受信されない。
   - 修正: Linuxプラットフォームで一部のアプリ間MIDIデバイスが接続されない
   - 修正: [再生モードを停止した後でもエディターでMIDIメッセージを受信し続ける](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/31)
-- v2.0.1 バグ修正リリース: 2025年1月12日
+- v2.0.1 バグ修正リリース: 2026年1月12日
   - 修正: Androidプラグインの初期化
   - 修正: NullReferenceException関連の修正
   - 更新: macOSプラグイン
@@ -106,3 +106,7 @@
   - 修正: AndroidプラットフォームでのNullPointerExceptionによるクラッシュ: [MidiSampleScene crash when the app "抖音" is installed,There was no such thing before the upgrade to Android 15.](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/44)
   - 追加: Maestro MIDI Player Tool Kitの統合
   - 修正: UnityEditorでのUmpSequencerの問題
+- v2.0.2 バグ修正リリース: 2026年2月10日
+  - 修正: Android、Nearby、またはRTP-MIDIでMidiManagerの初期化が完了しない問題
+  - 修正: DocumentationExamplesの実装に関する問題
+  - 修正: MPEセットアップメソッドでシステムが初期化されない問題
