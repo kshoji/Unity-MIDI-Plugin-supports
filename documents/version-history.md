@@ -110,3 +110,8 @@
     - Fixed: MidiManager initialize not completed with Android, Nearby, or RTP-MIDI.
     - Fixed: DocumentationExamples implementation issues
     - Fixed: MPE setup method doesn't initialize the system
+- v2.0.3 Bugfix release: 20 Sep 2026
+    - Fixed: Android GameActivity / Bluetooth MIDI startup crash (`ClassNotFoundException: BleMidiUnityPlayerActivity`), including Meta Quest on Unity 6: [Bluetooth MIDI crashes on Meta Quest 3 with Unity 6 (GameActivity compatibility)](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/48)
+    - Fixed: `PostProcessBuild` now selects `BleMidiUnityGamePlayerActivity` when Application Entry Point includes GameActivity (`FEATURE_ANDROID_COMPANION_DEVICE`)
+    - Updated: Android BLE MIDI plugin (`ble-midi-0.0.21.aar`)
+    - Updated: Android Inter-App MIDI plugin (`inter-app-midi-0.0.6.aar`, `minCompileSdk` 34)

@@ -49,6 +49,7 @@ BLE MIDI デバイスの接続に Android の Companion Device Pairing を使用
 注意点:
 - Meta Quest デバイスで Bluetooth MIDI デバイスを検索・接続するためにこの機能を使用できます。
 - Android のバージョンや挙動によっては、位置情報の許可リクエストが必要になる場合があります。
+- Unity 6 以降（2023.1 以降）で **Application Entry Point** に **GameActivity** が含まれる場合、ビルド後処理はメイン Activity を `jp.kshoji.unity.midi.BleMidiUnityGamePlayerActivity` に設定します。**Activity** のみの場合は `jp.kshoji.unity.midi.BleMidiUnityPlayerActivity` を使用します。両方のエントリポイントが有効な場合は、各 Unity ランチャー Activity を対応する BLE MIDI Activity に書き換えます。
 
 <div class="page" />
 

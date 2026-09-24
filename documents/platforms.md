@@ -51,6 +51,7 @@ Practical notes (mirrors the manual):
   - See: [Build PostProcessing & Scripting Define Symbols](build-postprocessing.md) (Quest USB MIDI section)
 - **Bluetooth MIDI** device discovery/pairing can use Android’s Companion Device workflow.
   - Enable scripting define symbol: `FEATURE_ANDROID_COMPANION_DEVICE`
+  - On Unity 6+ with **GameActivity** as Application Entry Point, the post-process selects `BleMidiUnityGamePlayerActivity` (see [Build PostProcessing](build-postprocessing.md))
   - See: [Build PostProcessing & Scripting Define Symbols](build-postprocessing.md)
 
 ### iOS / macOS

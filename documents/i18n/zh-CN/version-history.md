@@ -110,3 +110,8 @@
   - 修复：Android、Nearby 或 RTP-MIDI 平台上 MidiManager 初始化无法完成的问题
   - 修复：DocumentationExamples 实现中的一个问题
   - 修复：MPE 设置方法中系统无法初始化的问题
+- v2.0.3 版本错误修复发布：2026年9月20日
+  - 修复：Android GameActivity / Bluetooth MIDI 启动崩溃（`ClassNotFoundException: BleMidiUnityPlayerActivity`），包括 Unity 6 上的 Meta Quest：[Bluetooth MIDI crashes on Meta Quest 3 with Unity 6 (GameActivity compatibility)](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/48)
+  - 修复：启用 `FEATURE_ANDROID_COMPANION_DEVICE` 时，若 Application Entry Point 包含 GameActivity，`PostProcessBuild` 会选择 `BleMidiUnityGamePlayerActivity`
+  - 更新：Android BLE MIDI 插件（`ble-midi-0.0.21.aar`）
+  - 更新：Android 应用间 MIDI 插件（`inter-app-midi-0.0.6.aar`，`minCompileSdk` 34）
