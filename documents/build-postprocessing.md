@@ -49,6 +49,7 @@ To enable:
 Notes:
 - Meta Quest devices can use this feature to find/connect Bluetooth MIDI devices.
 - This feature may require requesting location permission depending on Android version/behavior.
+- On Unity 6+ (2023.1+), when **Application Entry Point** includes **GameActivity**, the post-process sets the main activity to `jp.kshoji.unity.midi.BleMidiUnityGamePlayerActivity`. When only **Activity** is selected, it uses `jp.kshoji.unity.midi.BleMidiUnityPlayerActivity`. If both entry points are enabled, each Unity launcher activity is rewritten to the matching BLE MIDI activity.
 
 <div class="page" />
 

@@ -13,7 +13,7 @@
 ### Android (明示的なアプリ間 MIDI 統合)
 - Android AAR を介して実装され、Android プラグインラッパーを通じて Unity からアクセスされます。
 - 場所:
-  - `Assets/MIDI/Plugins/Android/inter-app-midi-0.0.5.aar`
+  - `Assets/MIDI/Plugins/Android/inter-app-midi-0.0.6.aar`
   - `Assets/MIDI/Scripts/MidiPlugin.Android.cs` (MIDI 1.0)
   - `Assets/MIDI/Scripts/Midi2Plugin.Android.cs` (MIDI 2.0 / UMP)
 - USB MIDI や BLE MIDI に加えて、「Inter-App」トランスポートが利用可能です。

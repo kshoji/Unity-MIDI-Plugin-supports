@@ -50,6 +50,7 @@
 注意：
 - Meta Quest 设备可以使用此功能来查找/连接蓝牙 MIDI 设备。
 - 根据 Android 版本或行为的不同，此功能可能需要请求位置权限。
+- 在 Unity 6+（2023.1+）中，若 **Application Entry Point** 包含 **GameActivity**，后处理会将主 Activity 设为 `jp.kshoji.unity.midi.BleMidiUnityGamePlayerActivity`；仅选择 **Activity** 时使用 `jp.kshoji.unity.midi.BleMidiUnityPlayerActivity`。若同时启用两个入口，则会按类型将各 Unity 启动 Activity 改写为对应的 BLE MIDI Activity。
 
 <div class="page" />
 

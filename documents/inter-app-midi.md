@@ -13,7 +13,7 @@ Because “Inter‑App MIDI” is not a single universal standard name on every 
 ### Android (explicit Inter‑App MIDI integration)
 - Implemented via an Android AAR and accessed from Unity through the Android plugin wrappers.
 - Location:
-  - `Assets/MIDI/Plugins/Android/inter-app-midi-0.0.5.aar`
+  - `Assets/MIDI/Plugins/Android/inter-app-midi-0.0.6.aar`
   - `Assets/MIDI/Scripts/MidiPlugin.Android.cs` (MIDI 1.0)
   - `Assets/MIDI/Scripts/Midi2Plugin.Android.cs` (MIDI 2.0 / UMP)
 - You get an “Inter‑App” transport in addition to USB MIDI and BLE MIDI.

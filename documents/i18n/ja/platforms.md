@@ -51,6 +51,7 @@ Meta Quest デバイスは Android で動作するため、上記の **Android**
   - 参照: [ビルド後の処理とスクリプト定義シンボル](build-postprocessing.md) (Quest USB MIDI のセクション)
 - **Bluetooth MIDI** デバイスの検索とペアリングには、Android の Companion Device ワークフローを使用できます。
   - スクリプト定義シンボルを有効化: `FEATURE_ANDROID_COMPANION_DEVICE`
+  - Unity 6 以降で Application Entry Point に **GameActivity** を使う場合、ビルド後処理は `BleMidiUnityGamePlayerActivity` を選択します（[ビルド後の処理](build-postprocessing.md) 参照）
   - 参照: [ビルド後の処理とスクリプト定義シンボル](build-postprocessing.md)
 
 ### iOS / macOS

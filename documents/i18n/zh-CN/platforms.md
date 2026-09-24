@@ -51,6 +51,7 @@ Meta Quest 设备运行 Android，因此上述 **Android** 要求同样适用。
   - 参见：[构建后处理与脚本定义符号](build-postprocessing.md)（Quest USB MIDI 章节）
 - **蓝牙 MIDI** 设备的发现/配对可以使用 Android 的伴生设备 (Companion Device) 工作流。
   - 启用脚本定义符号：`FEATURE_ANDROID_COMPANION_DEVICE`
+  - Unity 6+ 且 Application Entry Point 使用 **GameActivity** 时，后处理会选择 `BleMidiUnityGamePlayerActivity`（见 [构建后处理](build-postprocessing.md)）
   - 参见：[构建后处理与脚本定义符号](build-postprocessing.md)
 
 ### iOS / macOS

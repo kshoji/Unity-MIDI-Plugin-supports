@@ -1,4 +1,4 @@
-﻿# 更新履歴
+﻿`# 更新履歴
 
 - v1.0 初期リリース: 2021/08/07
 - v1.1 更新リリース: 2022/04/11
@@ -110,3 +110,8 @@
   - 修正: Android、Nearby、またはRTP-MIDIでMidiManagerの初期化が完了しない問題
   - 修正: DocumentationExamplesの実装に関する問題
   - 修正: MPEセットアップメソッドでシステムが初期化されない問題
+- v2.0.3 バグ修正リリース: 2026年9月20日
+  - 修正: Android GameActivity / Bluetooth MIDI 起動時クラッシュ（`ClassNotFoundException: BleMidiUnityPlayerActivity`）。Unity 6 の Meta Quest を含む: [Bluetooth MIDI crashes on Meta Quest 3 with Unity 6 (GameActivity compatibility)](https://github.com/kshoji/Unity-MIDI-Plugin-supports/issues/48)
+  - 修正: `FEATURE_ANDROID_COMPANION_DEVICE` 有効時、Application Entry Point に GameActivity が含まれる場合は `BleMidiUnityGamePlayerActivity` を選択するよう `PostProcessBuild` を修正
+  - 更新: Android BLE MIDI プラグイン（`ble-midi-0.0.21.aar`）
+  - 更新: Android アプリ間 MIDI プラグイン（`inter-app-midi-0.0.6.aar`、`minCompileSdk` 34）
