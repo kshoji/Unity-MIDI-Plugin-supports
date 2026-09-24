@@ -1,4 +1,4 @@
-﻿# 入门指南（安装、初始化、发送/接收）
+# 入门指南（安装、初始化、发送/接收）
 
 ## 安装
 
@@ -64,6 +64,9 @@ public sealed class Midi1QuickStart : MonoBehaviour, IMidiDeviceEventHandler, IM
 ```
 
 ## MIDI 1.0 发送
+
+直接调用 `MidiManager`：
+
 ```csharp
 // 发送 Note On
 MidiManager.Instance.SendMidiNoteOn(
@@ -75,8 +78,41 @@ MidiManager.Instance.SendMidiNoteOn(
 );
 ```
 
+使用 Fluent API (`MidiSend`)：
+
+```csharp
+using jp.kshoji.unity.midi.util;
+
+MidiSend.To("deviceId").Channel(0).NoteOn(60, 127);
+
+// 发送到第一个输出设备
+MidiSend.ToFirstOutput().Channel(0).ControlChange(1, 64);
+```
+
+有关详细信息，请参阅 [工具类 (MidiNoteUtility / MidiMessageBuilder)](utilities.md)。
+
 您可以从以下位置获取输出设备 ID：
 - `MidiManager.Instance.OutputDeviceIdSet` (类型: `HashSet<string>`)
+
+<div class="page" />
+
+## 在编辑器中调试
+
+在 Play 模式下，使用 **MIDI 监视器 (MIDI Monitor)** 实时查看 MIDI 输入/输出消息。
+
+```
+Window > MIDI > Monitor
+```
+
+有关详细信息，请参阅 [编辑器工具 (MIDI 监视器)](editor-tools.md)。
+
+## 可选：Unity-MCP（AI / Cursor）
+
+在工程中安装 [Unity-MCP](https://github.com/IvanMurzak/Unity-MCP)（`com.ivanmurzak.unity.mcp`），配置 **Window → AI Game Developer** 后，从 Cursor：
+
+1. Play Mode → `midi-init` → `midi-devices-list` → `midi-send-note`（C4）→ `midi-monitor-read`
+
+已构建 Player：放置 `MidiMcpRuntimeBootstrap`，将 Host 设为局域网 MCP Server，并先在 Editor 完成组件接线后再使用控制工具。网络（`FEATURE_MIDI_NETWORK`）：Editor `midi-net-hub-client-setup` → Player `midi-net-rtt`。MIDI 2.0：`midi2-devices-list` / `midi2-send-ump`。详见 [MCP README](../../../Scripts/Integrations/Mcp/README.md)、[示例提示词](unity-mcp-sample-prompts.md)、[define 矩阵](unity-mcp-define-matrix.md)。VST 主机见 [Unity-VST3-Bridge](https://github.com/kshoji/Unity-VST3-Bridge)（桌面 Player；非 Android MCP）。
 
 ## MIDI 2.0 快速入门
 ```csharp
@@ -116,6 +152,11 @@ public sealed class Midi2QuickStart : MonoBehaviour, IMidi2DeviceEventHandler, I
 
 ## 后续阅读内容
 
+- [面向游戏玩法的组件 (InputMap / NoteTracker / Filter)](gameplay.md)
+- [SMF 工具 (SmfPlayer / MidiRecorder / TempoMapExtractor)](smf-tools.md)
+- [工具类 (MidiNoteUtility / MidiMessageBuilder)](utilities.md)
+- [编辑器工具 (MIDI 监视器)](editor-tools.md)
+- [Unity-MCP 集成](../../../Scripts/Integrations/Mcp/README.md) · [示例提示词](unity-mcp-sample-prompts.md) · [define 矩阵](unity-mcp-define-matrix.md)
 - [平台与限制](platforms.md)
 - [构建后处理与脚本定义符号](build-postprocessing.md)
 - [传输协议与平台说明](transports.md)

@@ -60,7 +60,20 @@ MIDI 2.0 插件实现派生自：
 - `Midi2Plugin.Android.cs`
 - `Midi2Plugin.Apple.cs`
 - `Midi2Plugin.Linux.cs`
+- `Midi2Plugin.Uwp.cs`（`UwpMidi2Plugin` — 仅 UWP 播放器；方法 B / Windows MIDI Services winmd）
+- `Midi2Plugin.Windows.cs`（`WindowsMidi2Plugin` — 独立版 / 编辑器 Windows；方法 C / `Midi2Native.dll`）
 - `Midi2Plugin.Udp.cs` (网络传输)
+
+UWP（`UwpMidi2Plugin`）注意事项：
+- **仅 UWP 播放器构建**（Unity 编辑器 / Standalone Windows 中不编译、不可用）。
+- 需要 Windows 11 24H2+（26100+）、已启用 Windows MIDI Services，并已安装 SDK Runtime。详见 [平台与限制](platforms.md) 的 UWP 节。
+- 示例场景：`Assets/MIDI/Samples/Scenes/Midi2SampleScene.unity`（已调用 `InitializeMidi2`）。
+
+独立版 / 编辑器 Windows（`WindowsMidi2Plugin`）注意事项：
+- **独立 Windows 与 Unity 编辑器 Windows**（`UNITY_EDITOR_WIN || (UNITY_STANDALONE_WIN && !UNITY_EDITOR)`）。UWP 仍为方法 B（`UwpMidi2Plugin`）；请勿混用后端。
+- OS / SDK Runtime 要求与 UWP MIDI 2.0 相同，另需 `Assets/MIDI/Plugins/Windows/` 下的原生 `Midi2Native.dll`。详见 [平台与限制](platforms.md) 的 Windows 节。
+- MIDI 1.0 WinMM（`WindowsMidiPlugin`）可能并行枚举同一硬件 — 视为**预期的双重枚举**。
+- 示例场景：`Assets/MIDI/Samples/Scenes/Midi2SampleScene.unity`（已调用 `InitializeMidi2`）。
 
 <div class="page" />
 
@@ -253,6 +266,18 @@ if (discovered.Count > 0)
 - 虽然支持 MIDI 2.0 剪辑文件 (Clip file)，但该文件格式尚未广泛普及。
 - 虽然支持 MIDI 2.0 容器文件 (Container file)，但容器规范目前仍处于草案阶段，可能会发生变化。
   - 请将容器工作流视为实验性功能。
+
+### 与 Scriptable Audio 的取舍（DSP 同步播放）
+
+[Scriptable Audio 集成](integrations.md#ump-序列播放dsp-同步) 中的 `MidiDspUmpSequenceScheduler` 是另一个层，它在 Unity DSP 时钟上以接近采样精度的时序播放 UMP 剪辑。`UmpSequencer` 由挂钟时间 + 专用线程驱动，面向剪辑编辑、录制和试听播放。在同一场景中，请**二选一**。
+
+| 用途 | 推荐 |
+|------|------|
+| 剪辑编辑 / 录制 / `.midi2` 试听播放 | `UmpSequencer` |
+| 游戏内 BGM / 循环 / Seek / DSP 同步音频 | `MidiDspUmpSequenceScheduler` |
+| 硬件 MIDI 2.0 输出（可接受帧级粒度） | 通过 `MidiManager.SendMidi2RawUmp`。如果需要 DSP 精度的内置音频，请使用 `MidiDspUmpSequenceScheduler` + `MidiDspUmpMidi2OutBridge` |
+
+如果要将 `.midi2` 作为 Unity 资源保存，可以使用 `UmpSequenceAsset`（[SMF 工具](smf-tools.md#umpsequenceasset)）。有关 DSP 同步播放的详细信息、限制以及手动验证步骤，请参阅 [Unity 生态系统集成 — UMP 序列](integrations.md#ump-序列播放dsp-同步)。
 
 <div class="page" />
 

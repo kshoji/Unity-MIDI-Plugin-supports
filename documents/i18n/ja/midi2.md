@@ -63,7 +63,20 @@ MIDI 2.0 プラグインの実装は以下を継承しています:
 - `Midi2Plugin.Android.cs`
 - `Midi2Plugin.Apple.cs`
 - `Midi2Plugin.Linux.cs`
+- `Midi2Plugin.Uwp.cs`（`UwpMidi2Plugin` — UWP プレイヤーのみ。方法 B / Windows MIDI Services winmd）
+- `Midi2Plugin.Windows.cs`（`WindowsMidi2Plugin` — Standalone / Editor Windows。方法 C / `Midi2Native.dll`）
 - `Midi2Plugin.Udp.cs` (ネットワークトランスポート)
+
+UWP（`UwpMidi2Plugin`）の注意:
+- **UWP プレイヤービルド専用**（Unity Editor / Standalone Windows ではコンパイル対象外・動作しない）。
+- OS: Windows 11 24H2+（26100+）、Windows MIDI Services 有効、SDK Runtime 導入済みが必要。詳細は [プラットフォームと制限事項](platforms.md) の UWP 節。
+- サンプル検証: `Assets/MIDI/Samples/Scenes/Midi2SampleScene.unity`（`InitializeMidi2` 済み）。
+
+Standalone / Editor Windows（`WindowsMidi2Plugin`）の注意:
+- **Standalone Windows および Unity Editor Windows**（`UNITY_EDITOR_WIN || (UNITY_STANDALONE_WIN && !UNITY_EDITOR)`）。UWP は方法 B（`UwpMidi2Plugin`）のまま。バックエンドを混在させないこと。
+- OS / SDK Runtime 要件は UWP MIDI 2.0 と同じ。加えて `Assets/MIDI/Plugins/Windows/` 配下のネイティブ `Midi2Native.dll` が必要。詳細は [プラットフォームと制限事項](platforms.md) の Windows 節。
+- MIDI 1.0 WinMM（`WindowsMidiPlugin`）と同一ハードウェアが並行列挙されることがある — **仕様（二重列挙）**として扱う。
+- サンプル検証: `Assets/MIDI/Samples/Scenes/Midi2SampleScene.unity`（`InitializeMidi2` 済み）。
 
 <div class="page" />
 
@@ -256,6 +269,18 @@ if (discovered.Count > 0)
 - MIDI 2.0 クリップファイルのサポートはありますが、クリップファイル自体はまだ普及していません。
 - MIDI 2.0 コンテナファイルのサポートはありますが、コンテナ仕様はドラフト段階であり、変更される可能性があります。
   - コンテナワークフローは試験的なものと考えてください。
+
+### Scriptable Audio との使い分け（DSP 同期再生）
+
+[Scriptable Audio 統合](integrations.md#ump-シーケンス再生dsp-同期) の `MidiDspUmpSequenceScheduler` は、UMP クリップを Unity DSP クロック上でサンプル精度に近いタイミングで再生する別レイヤーです。`UmpSequencer` はウォールクロック + 専用スレッド駆動で、クリップ編集・録音・試験再生向けです。同一シーンでは **どちらか一方** を選択してください。
+
+| 用途 | 推奨 |
+|------|------|
+| クリップ編集・録音・`.midi2` 試験再生 | `UmpSequencer` |
+| ゲーム内 BGM / ループ / Seek / DSP 同期音声 | `MidiDspUmpSequenceScheduler` |
+| ハードウェア MIDI 2.0 出力（フレーム粒度で可） | `MidiManager.SendMidi2RawUmp` 経由。DSP 精度の内蔵音声が必要なら `MidiDspUmpSequenceScheduler` + `MidiDspUmpMidi2OutBridge` |
+
+`.midi2` を Unity アセットとして保持する場合は `UmpSequenceAsset`（[SMF ツール](smf-tools.md#umpsequenceasset)）を利用できます。DSP 同期再生の詳細・制約・手動確認手順は [Unity エコシステム統合 — UMP シーケンス](integrations.md#ump-シーケンス再生dsp-同期) を参照してください。
 
 <div class="page" />
 

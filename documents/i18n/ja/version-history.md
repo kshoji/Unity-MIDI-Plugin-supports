@@ -1,4 +1,4 @@
-﻿`# 更新履歴
+﻿# 更新履歴
 
 - v1.0 初期リリース: 2021/08/07
 - v1.1 更新リリース: 2022/04/11
@@ -115,3 +115,15 @@
   - 修正: `FEATURE_ANDROID_COMPANION_DEVICE` 有効時、Application Entry Point に GameActivity が含まれる場合は `BleMidiUnityGamePlayerActivity` を選択するよう `PostProcessBuild` を修正
   - 更新: Android BLE MIDI プラグイン（`ble-midi-0.0.21.aar`）
   - 更新: Android アプリ間 MIDI プラグイン（`inter-app-midi-0.0.6.aar`、`minCompileSdk` 34）
+- v2.1.0 更新リリース: 2026年6月26日
+  - 追加（**コア・ユーティリティ**）: ノート番号と音名の相互変換、Fluent API による MIDI 1.0 送信、スケール判定ユーティリティ、エディタ鍵盤の共有レイアウト；プロジェクト全体の MIDI 設定；ゲームプレイ・統合全体での全メッセージ種別イベント対応
+  - 追加（**エディタツール**）: Play モード向けリアルタイム MIDI モニターと仮想 MIDI コントローラー；SMF プレビュー / インポート；MIDI Project Settings；シーケンスアセットからの Timeline マーカー自動生成；CI 用スクリプティング定義マトリクスのバッチコンパイル
+  - 追加（**ゲームプレイ・SMF**）: Inspector から MIDI → UnityEvent をマッピング；チャンネルごとの押下ノート追跡とチャンネル / デバイスフィルタ；CC スムージングとボタン検出；ゲーム時間同期の SMF 再生とライブ録音；テンポ・拍子記号の抽出；SMF の ScriptableObject 化
+  - 追加（**Clock・和音・スケール**）: 外部 MIDI Clock 同期とマスター Clock 出力；外部 Clock に合わせた SMF 再生；和音名判定、スケール所属判定、練習・クイズ支援
+  - 追加（**Unity 統合**）: MIDI から Animator パラメータ・Blend Tree を駆動；Timeline の再生 / 録音トラック、マーカー、シグナル；Visual Scripting の MIDI イベント / 送信 / 再生ノード
+  - 追加（**ネットワーク**）: LAN 上の UDP MIDI 同期（ブロードキャスト、マージ、再生位置同期）；セッション探索とレイテンシ補正；オプションの Mirror / Netcode / WSNet2 マルチプレイヤーブリッジ
+  - 追加（**オプション統合**）: 合成 MIDI デバイスによる Input System 双方向ブリッジ；Scriptable Audio Pipeline による DSP スケジュール再生；Chunity（ChucK）MIDI ブリッジ；Maestro / MPTK 統合の拡充（イベントパイプライン、再生、スパシャライザーなど）
+  - 追加（**Foundation**）: レイテンシ校正、デバイス選択、設定永続化、出力ルーティングプリセット、UI Toolkit HUD の共有基盤
+  - 追加（**サンプル・ドキュメント**）: メニュー起動付きサンプル再構成；各統合・ネットワークモードのサンプルシーン；kits / integrations / build-postprocessing / samples ドキュメントの拡充
+  - 修正: MIDI モニター・仮想 MIDI コントローラーの安定性；サンプルシーンの GUID・配線；Unity 2021 コンパイル互換
+  - 修正: Unity Fast Enter Play Mode（Domain Reload 無効）向けに、MidiManager / MpeManager シングルトンを含む可変 static 状態のリセットを追加

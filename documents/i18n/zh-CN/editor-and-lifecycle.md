@@ -43,3 +43,27 @@
 
 如果您的场景中已经包含 Unity `EventSystem`，请避免创建重复的实例。  
 如果您遇到重复冲突的警告/错误，请相应地调整初始化代码（参见 [入门指南](getting-started.md)）。
+
+<div class="page" />
+
+## MIDI 监视器 (编辑器工具)
+
+Unity 编辑器包含一个 **MIDI 监视器**，可在播放模式下实时显示 MIDI 输入/输出。
+
+```
+Window > MIDI > Monitor
+```
+
+### 行为
+
+- 播放模式开始时会自动创建一个 `[MIDI Monitor Proxy]`，并将其作为事件处理器注册到 `MidiManager`。
+- 播放模式结束时，该 Proxy 会被自动销毁。
+- 发出的消息通过 `MidiManager` 的编辑器专用挂钩（`#if UNITY_EDITOR`）捕获。
+
+### 注意事项
+
+- 监视器仅在播放模式下可用。在编辑模式下不会显示消息。
+- Proxy 的创建独立于 `MidiManager.InitializeMidi()`。即使在 MIDI 初始化之前，Proxy 也会被注册，但要接收消息仍需像往常一样调用 `InitializeMidi()`。
+- 日志缓冲区在停止播放后仍会保留在窗口中。您可以在下次播放时通过 **Clear** 将其清除。
+
+详情请参见 [编辑器工具 (MIDI 监视器)](editor-tools.md)。

@@ -20,7 +20,7 @@
 - Unity MIDI Plugin OSX: [https://github.com/kshoji/Unity-MIDI-Plugin-OSX](https://github.com/kshoji/Unity-MIDI-Plugin-OSX)
 
 ## Used Open Source Software packages created by others:
-- Network MIDI 2.0(UDP MIDI 2.0) Discovery feature
+- Network MIDI 2.0 / RTP-MIDI discovery (shared under `Assets/MIDI/Scripts/MdnsVendor/`)
     - [net-mdns](https://github.com/richardschneider/net-mdns) 0.27.0
     - [net-dns](https://github.com/richardschneider/net-dns) 2.0.1
     - [SimpleBase](https://github.com/ssg/SimpleBase) 2.1.0, modified to compile with older version's Unity

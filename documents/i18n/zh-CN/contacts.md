@@ -1,4 +1,4 @@
-﻿# 联系与支持
+# 联系与支持
 
 ## 在 GitHub 上报告问题
 - GitHub 支持仓库：[https://github.com/kshoji/Unity-MIDI-Plugin-supports](https://github.com/kshoji/Unity-MIDI-Plugin-supports)
@@ -20,7 +20,7 @@
 - Unity MIDI 插件 OSX：[https://github.com/kshoji/Unity-MIDI-Plugin-OSX](https://github.com/kshoji/Unity-MIDI-Plugin-OSX)
 
 ## 由他人创建并使用的开源软件包：
-- 网络 MIDI 2.0 (UDP MIDI 2.0) 发现功能
+- 网络 MIDI 2.0 / RTP-MIDI 发现（共享：`Assets/MIDI/Scripts/MdnsVendor/`）
   - [net-mdns](https://github.com/richardschneider/net-mdns) 0.27.0
   - [net-dns](https://github.com/richardschneider/net-dns) 2.0.1
   - [SimpleBase](https://github.com/ssg/SimpleBase) 2.1.0（经过修改以支持在旧版 Unity 中编译）

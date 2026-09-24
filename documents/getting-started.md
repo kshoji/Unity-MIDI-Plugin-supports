@@ -1,4 +1,4 @@
-﻿# Getting Started (Install, Initialize, Send/Receive)
+# Getting Started (Install, Initialize, Send/Receive)
 
 ## Install
 
@@ -59,6 +59,9 @@ public sealed class Midi1QuickStart : MonoBehaviour, IMidiDeviceEventHandler, IM
 ```
 
 ## MIDI 1.0 send
+
+Direct `MidiManager` call:
+
 ```csharp
 // Send Note On
 MidiManager.Instance.SendMidiNoteOn(
@@ -69,8 +72,42 @@ MidiManager.Instance.SendMidiNoteOn(
     127 /*velocity*/
 );
 ```
+
+Using the Fluent API (`MidiSend`):
+
+```csharp
+using jp.kshoji.unity.midi.util;
+
+MidiSend.To("deviceId").Channel(0).NoteOn(60, 127);
+
+// Send to the first output device
+MidiSend.ToFirstOutput().Channel(0).ControlChange(1, 64);
+```
+
+See [Utilities (MidiNoteUtility / MidiMessageBuilder)](utilities.md) for details.
+
 You can get output device IDs from:
 - `MidiManager.Instance.OutputDeviceIdSet` (type: `HashSet<string>`)
+
+<div class="page" />
+
+## Debugging in the Editor
+
+During Play Mode, use the **MIDI Monitor** to check MIDI input/output messages in real time.
+
+```
+Window > MIDI > Monitor
+```
+
+See [Editor Tools (MIDI Monitor)](editor-tools.md) for details.
+
+## Optional: Unity-MCP (AI / Cursor)
+
+Install [Unity-MCP](https://github.com/IvanMurzak/Unity-MCP) (`com.ivanmurzak.unity.mcp`) in the project, open **Window → AI Game Developer**, then from Cursor:
+
+1. Play Mode → `midi-init` → `midi-devices-list` → `midi-send-note` (C4) → `midi-monitor-read`
+
+Built Player: place `MidiMcpRuntimeBootstrap`, set Host to the LAN MCP Server, wire components in the Editor first (control tools only on Player). Networking (`FEATURE_MIDI_NETWORK`): Editor `midi-net-hub-client-setup` → Player `midi-net-rtt`. MIDI 2.0: `midi2-devices-list` / `midi2-send-ump`. See [MCP README](../Scripts/Integrations/Mcp/README.md), [sample prompts](unity-mcp-sample-prompts.md), and [define matrix](unity-mcp-define-matrix.md). VST host tools live in [Unity-VST3-Bridge](https://github.com/kshoji/Unity-VST3-Bridge) (desktop Player; not Android MCP).
 
 ## MIDI 2.0 quick start
 ```csharp
@@ -109,6 +146,11 @@ public sealed class Midi2QuickStart : MonoBehaviour, IMidi2DeviceEventHandler, I
 
 ## Where to look next
 
+- [Gameplay Components (InputMap / NoteTracker / Filter)](gameplay.md)
+- [SMF Tools (SmfPlayer / MidiRecorder / TempoMapExtractor)](smf-tools.md)
+- [Utilities (MidiNoteUtility / MidiMessageBuilder)](utilities.md)
+- [Editor Tools (MIDI Monitor)](editor-tools.md)
+- [Unity-MCP integration](../Scripts/Integrations/Mcp/README.md) · [sample prompts](unity-mcp-sample-prompts.md) · [define matrix](unity-mcp-define-matrix.md)
 - [Platforms & Limitations](platforms.md)
 - [Build PostProcessing & Scripting Define Symbols](build-postprocessing.md)
 - [Transports & Platform Notes](transports.md)
